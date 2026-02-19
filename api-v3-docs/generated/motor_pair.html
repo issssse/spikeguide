@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>motor_pair &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/motor_pair.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="orientation" href="orientation.html" />
+    <link rel="prev" title="motor" href="motor.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="orientation.html" title="orientation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="motor.html" title="motor"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">motor_pair</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-motor_pair">
+<span id="motor-pair"></span><h1>motor_pair<a class="headerlink" href="#module-motor_pair" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">motor_pair</span></code> module is used to run motors in a synchronized fashion.
+This mode is optimal for creating drivebases where you’d want a pair of motors
+to start and stop at the same time.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">motor_pair</span></code> module, add the following import statement to your
+project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">motor_pair</span></code>
+module as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following constants are defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PAIR_1</span></code> = 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PAIR_2</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PAIR_3</span></code> = 2</p></li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor_pair.move" title="motor_pair.move"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move</span></code></a>(pair, steering, *[, velocity, acceleration])</p></td>
+<td><p>Move a Motor Pair at a constant speed until a new command is given.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor_pair.move_for_degrees" title="motor_pair.move_for_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_for_degrees</span></code></a>(pair, degrees, steering, *)</p></td>
+<td><p>Move a Motor Pair at a constant speed for a specific number of degrees.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor_pair.move_for_time" title="motor_pair.move_for_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_for_time</span></code></a>(pair, duration, steering, *[, ...])</p></td>
+<td><p>Move a Motor Pair at a constant speed for a specific duration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor_pair.move_tank" title="motor_pair.move_tank"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_tank</span></code></a>(pair, left_velocity, right_velocity, *)</p></td>
+<td><p>Perform a tank move on a Motor Pair at a constant speed until a new command is given.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor_pair.move_tank_for_degrees" title="motor_pair.move_tank_for_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_tank_for_degrees</span></code></a>(pair, degrees, ...[, ...])</p></td>
+<td><p>Perform a tank move on a Motor Pair for a specific number of degrees.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor_pair.move_tank_for_time" title="motor_pair.move_tank_for_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_tank_for_time</span></code></a>(pair, left_velocity, ...)</p></td>
+<td><p>Perform a tank move on a Motor Pair for a specific amount of time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor_pair.pair" title="motor_pair.pair"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pair</span></code></a>(pair, left_motor, right_motor)</p></td>
+<td><p>Pair two motors (<code class="docutils literal notranslate"><span class="pre">left_motor</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">right_motor</span></code>) and store the paired motors in <code class="docutils literal notranslate"><span class="pre">pair</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor_pair.stop" title="motor_pair.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>(pair, *[, stop])</p></td>
+<td><p>Stop a Motor Pair.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor_pair.unpair" title="motor_pair.unpair"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unpair</span></code></a>(pair)</p></td>
+<td><p>Unpair a Motor Pair.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.move">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steering</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.move" title="Link to this definition">¶</a></dt>
+<dd><p>Move a Motor Pair at a constant speed until a new command is given.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Pair motors on port A and B</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">runloop</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at default velocity</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">runloop</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at a specific velocity</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">velocity</span><span class="o">=</span><span class="mi">280</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">runloop</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at a specific velocity and acceleration</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">velocity</span><span class="o">=</span><span class="mi">280</span><span class="p">,</span>
+        <span class="n">acceleration</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>steering</strong> (<em>int</em>) – The steering (-100 to 100)</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; Value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration (deg/sec²) (1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.move_for_degrees">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">move_for_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steering</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.move_for_degrees" title="Link to this definition">¶</a></dt>
+<dd><p>Move a Motor Pair at a constant speed for a specific number of degrees.
+When awaited, returns a status of the movement that corresponds to one of
+the following constants from the motor module:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Pair motors on port A and B</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at default velocity for 90 degrees</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_for_degrees</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at a specific velocity</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_for_degrees</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="o">=</span><span class="mi">280</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at a specific velocity with a slow deceleration</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_for_degrees</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="o">=</span><span class="mi">280</span><span class="p">,</span> <span class="n">deceleration</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>degrees</strong> (<em>int</em>) – The number of degrees</p></li>
+<li><p><strong>steering</strong> (<em>int</em>) – The steering (-100 to 100)</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; Value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050.</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration (deg/sec²) (1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration (deg/sec²) (1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.move_for_time">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">move_for_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steering</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.move_for_time" title="Link to this definition">¶</a></dt>
+<dd><p>Move a Motor Pair at a constant speed for a specific duration. When
+awaited, returns a status of the movement that corresponds to one of the
+following constants from the motor module:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Pair motors on port A and B</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at default velocity for 1 second</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_for_time</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at a specific velocity for 1 second</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_for_time</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="o">=</span><span class="mi">280</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at a specific velocity for 10 seconds with a slow</span>
+    <span class="c1"># deceleration</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_for_time</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="o">=</span><span class="mi">280</span><span class="p">,</span> <span class="n">deceleration</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>duration</strong> (<em>int</em>) – The duration in milliseconds</p></li>
+<li><p><strong>steering</strong> (<em>int</em>) – The steering (-100 to 100)</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050.</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration (deg/sec²) (1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration (deg/sec²) (1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.move_tank">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">move_tank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_velocity</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.move_tank" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a tank move on a Motor Pair at a constant speed until a new
+command is given.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Pair motors on port A and B</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at default velocity</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">runloop</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+    <span class="c1"># Turn right</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">runloop</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+    <span class="c1"># Perform tank turn</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>left_velocity</strong> (<em>int</em>) – The velocity (deg/sec) of the left motor</p></li>
+<li><p><strong>right_velocity</strong> (<em>int</em>) – The velocity (deg/sec) of the right motor</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration (deg/sec²) (1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.move_tank_for_degrees">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">move_tank_for_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_velocity</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.move_tank_for_degrees" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a tank move on a Motor Pair for a specific number of degrees.
+When awaited, returns a status of the movement that
+corresponds to one of the following constants from the motor module:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Pair motors on port A and B</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at default velocity for 360 degrees</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank_for_degrees</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span>
+        <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="c1"># Turn right for 180 degrees</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank_for_degrees</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="c1"># Perform tank turn for 720 degrees</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank_for_degrees</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">720</span><span class="p">,</span>
+        <span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>degrees</strong> (<em>int</em>) – The number of degrees</p></li>
+<li><p><strong>left_velocity</strong> (<em>int</em>) – The velocity (deg/sec) of the left motor</p></li>
+<li><p><strong>right_velocity</strong> (<em>int</em>) – The velocity (deg/sec) of the right motor</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration (deg/sec²) (1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration (deg/sec²) (1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.move_tank_for_time">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">move_tank_for_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.move_tank_for_time" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a tank move on a Motor Pair for a specific
+amount of time. When awaited, returns a status of the movement that
+corresponds to one of the following constants from the motor module:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Pair motors on port A and B</span>
+    <span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="c1"># Move straight at default velocity for 1 second</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank_for_time</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="c1"># Turn right for 3 seconds</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank_for_time</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">1000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+
+    <span class="c1"># Perform tank turn for 2 seconds</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">move_tank_for_time</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>duration</strong> (<em>int</em>) – The duration in milliseconds</p></li>
+<li><p><strong>left_velocity</strong> (<em>int</em>) – The velocity (deg/sec) of the left motor</p></li>
+<li><p><strong>right_velocity</strong> (<em>int</em>) – The velocity (deg/sec) of the right motor</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration (deg/sec²) (1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration (deg/sec²) (1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.pair">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_motor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.pair" title="Link to this definition">¶</a></dt>
+<dd><p>Pair two motors (<code class="docutils literal notranslate"><span class="pre">left_motor</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">right_motor</span></code>) and store the paired
+motors in <code class="docutils literal notranslate"><span class="pre">pair</span></code>. Use <code class="docutils literal notranslate"><span class="pre">pair</span></code> in all subsequent <code class="docutils literal notranslate"><span class="pre">motor_pair</span></code>-related
+function calls.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+
+<span class="n">motor_pair</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>left_motor</strong> (<em>int</em>) – The port of the left motor. Use the <code class="docutils literal notranslate"><span class="pre">port</span></code>
+submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module.</p></li>
+<li><p><strong>right_motor</strong> (<em>int</em>) – The port of the right motor. Use the <code class="docutils literal notranslate"><span class="pre">port</span></code>
+submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.stop">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.stop" title="Link to this definition">¶</a></dt>
+<dd><p>Stop a Motor Pair.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="n">motor_pair</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor_pair.unpair">
+<span class="sig-prename descclassname"><span class="pre">motor_pair.</span></span><span class="sig-name descname"><span class="pre">unpair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor_pair.unpair" title="Link to this definition">¶</a></dt>
+<dd><p>Unpair a Motor Pair.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">motor_pair</span>
+
+<span class="n">motor_pair</span><span class="o">.</span><span class="n">unpair</span><span class="p">(</span><span class="n">motor_pair</span><span class="o">.</span><span class="n">PAIR_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pair</strong> (<em>int</em>) – The pair slot of the Motor Pair</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">motor_pair</a><ul>
+<li><a class="reference internal" href="#motor_pair.move"><code class="docutils literal notranslate"><span class="pre">move()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.move_for_degrees"><code class="docutils literal notranslate"><span class="pre">move_for_degrees()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.move_for_time"><code class="docutils literal notranslate"><span class="pre">move_for_time()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.move_tank"><code class="docutils literal notranslate"><span class="pre">move_tank()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.move_tank_for_degrees"><code class="docutils literal notranslate"><span class="pre">move_tank_for_degrees()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.move_tank_for_time"><code class="docutils literal notranslate"><span class="pre">move_tank_for_time()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.pair"><code class="docutils literal notranslate"><span class="pre">pair()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.stop"><code class="docutils literal notranslate"><span class="pre">stop()</span></code></a></li>
+<li><a class="reference internal" href="#motor_pair.unpair"><code class="docutils literal notranslate"><span class="pre">unpair()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="motor.html"
+                          title="previous chapter">motor</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="orientation.html"
+                          title="next chapter">orientation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/motor_pair.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="orientation.html" title="orientation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="motor.html" title="motor"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">motor_pair</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

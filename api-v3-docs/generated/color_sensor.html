@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>color_sensor &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/color_sensor.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="color_matrix" href="color_matrix.html" />
+    <link rel="prev" title="color" href="color.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="color_matrix.html" title="color_matrix"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="color.html" title="color"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">color_sensor</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-color_sensor">
+<span id="color-sensor"></span><h1>color_sensor<a class="headerlink" href="#module-color_sensor" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">color_sensor</span></code> module contains functions to interact with an attached Color
+Sensor (e.g. LEGO part 45605) and write code that reacts to specific colors or
+the intensity of the reflected light.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">color_sensor</span></code> module, add the following import statement to
+your project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">color_sensor</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">color_sensor</span></code>
+module as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">color_sensor</span><span class="o">.</span><span class="n">reflection</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The Color Sensor can recognize the following named colors:</p>
+<ul class="simple">
+<li><p>Red</p></li>
+<li><p>Green</p></li>
+<li><p>Blue</p></li>
+<li><p>Magenta</p></li>
+<li><p>Yellow</p></li>
+<li><p>Orange</p></li>
+<li><p>Azure</p></li>
+<li><p>Black</p></li>
+<li><p>White</p></li>
+</ul>
+<p>It can also return intensity values for the red, green, and blue channels
+individually for more control over color recognition.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#color_sensor.color" title="color_sensor.color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">color</span></code></a>(port)</p></td>
+<td><p>Get the enumerated color value of the detected color.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#color_sensor.reflection" title="color_sensor.reflection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reflection</span></code></a>(port)</p></td>
+<td><p>Get the intensity of the reflected light as a percent (0-100).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#color_sensor.rgbi" title="color_sensor.rgbi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgbi</span></code></a>(port)</p></td>
+<td><p>Get the individual intensities of red, green and blue as well as the overall intensity, each on a scale of 0-1024.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="color_sensor.color">
+<span class="sig-prename descclassname"><span class="pre">color_sensor.</span></span><span class="sig-name descname"><span class="pre">color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#color_sensor.color" title="Link to this definition">¶</a></dt>
+<dd><p>Get the enumerated color value of the detected color. Use the
+<code class="docutils literal notranslate"><span class="pre">color</span></code> module to map the color value to a specific color.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">color_sensor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">color</span>
+
+<span class="k">if</span> <span class="n">color_sensor</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">)</span> <span class="ow">is</span> <span class="n">color</span><span class="o">.</span><span class="n">RED</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Red detected&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="color_sensor.reflection">
+<span class="sig-prename descclassname"><span class="pre">color_sensor.</span></span><span class="sig-name descname"><span class="pre">reflection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#color_sensor.reflection" title="Link to this definition">¶</a></dt>
+<dd><p>Get the intensity of the reflected light as a percent (0-100).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="color_sensor.rgbi">
+<span class="sig-prename descclassname"><span class="pre">color_sensor.</span></span><span class="sig-name descname"><span class="pre">rgbi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#color_sensor.rgbi" title="Link to this definition">¶</a></dt>
+<dd><p>Get the individual intensities of red, green and blue as well as
+the overall intensity, each on a scale of 0-1024.</p>
+<p>Returns tuple[red: int, green: int, blue: int, intensity: int]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">color_sensor</a><ul>
+<li><a class="reference internal" href="#color_sensor.color"><code class="docutils literal notranslate"><span class="pre">color()</span></code></a></li>
+<li><a class="reference internal" href="#color_sensor.reflection"><code class="docutils literal notranslate"><span class="pre">reflection()</span></code></a></li>
+<li><a class="reference internal" href="#color_sensor.rgbi"><code class="docutils literal notranslate"><span class="pre">rgbi()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="color.html"
+                          title="previous chapter">color</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="color_matrix.html"
+                          title="next chapter">color_matrix</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/color_sensor.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="color_matrix.html" title="color_matrix"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="color.html" title="color"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">color_sensor</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

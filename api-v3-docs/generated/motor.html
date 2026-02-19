@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>motor &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/motor.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="motor_pair" href="motor_pair.html" />
+    <link rel="prev" title="hub.sound" href="hub.sound.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="motor_pair.html" title="motor_pair"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hub.sound.html" title="hub.sound"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">motor</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-motor">
+<span id="motor"></span><h1>motor<a class="headerlink" href="#module-motor" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">motor</span></code> module contains functions to control and query individual motors attached
+to the Spike hub.</p>
+<p>To use the <cite>motor</cite> module, add the following import statement to your project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">motor</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module
+as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">motor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following constants are defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">READY</span></code> = 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RUNNING</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STALLED</span></code> = 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CANCELLED</span></code> = 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code> = 4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DISCONNECTED</span></code> = 5</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COAST</span></code> = 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BRAKE</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HOLD</span></code> = 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONTINUE</span></code> = 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SMART_COAST</span></code> = 4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SMART_BRAKE</span></code> = 5</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOCKWISE</span></code> = 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COUNTERCLOCKWISE</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHORTEST_PATH</span></code> = 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LONGEST_PATH</span></code> = 3</p></li>
+</ul>
+<p><strong>NOTE</strong>: The <code class="docutils literal notranslate"><span class="pre">motor</span></code> module contains several functions that are not
+documented in the official LEGO materials. These are marked as
+<strong>UNDOCUMENTED</strong> in the function descriptions below. Their behavior has been
+determined empirically and they should be used with caution.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor.absolute_position" title="motor.absolute_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">absolute_position</span></code></a>(port)</p></td>
+<td><p>Get the absolute position of a Motor in degrees.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor.get_duty_cycle" title="motor.get_duty_cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_duty_cycle</span></code></a>(port)</p></td>
+<td><p>Get the PWM duty cycle of a Motor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor.info" title="motor.info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">info</span></code></a>(port)</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Get the device ID and maximum speed of the Motor as a tuple.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor.relative_position" title="motor.relative_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">relative_position</span></code></a>(port)</p></td>
+<td><p>Get the relative position of a Motor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor.reset_relative_position" title="motor.reset_relative_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_relative_position</span></code></a>(port, position)</p></td>
+<td><p>Set the position used as the offset when using the <code class="docutils literal notranslate"><span class="pre">relative_position</span></code> or <code class="docutils literal notranslate"><span class="pre">run_to_relative_position</span></code> functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor.run" title="motor.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(port, velocity, *[, acceleration])</p></td>
+<td><p>Run a Motor at a constant speed until a new command is given.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor.run_for_degrees" title="motor.run_for_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_for_degrees</span></code></a>(port, degrees, velocity, *)</p></td>
+<td><p>Turn a Motor for a specific number of degrees.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor.run_for_time" title="motor.run_for_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_for_time</span></code></a>(port, duration, velocity, *[, ...])</p></td>
+<td><p>Run a Motor for a specific amount of time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor.run_to_absolute_position" title="motor.run_to_absolute_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_to_absolute_position</span></code></a>(port, position, ...)</p></td>
+<td><p>Turn a Motor to an absolute position.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor.run_to_relative_position" title="motor.run_to_relative_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_to_relative_position</span></code></a>(port, position, ...)</p></td>
+<td><p>Turn a Motor to a position relative to its reference position (see <code class="docutils literal notranslate"><span class="pre">reset_relative_position</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor.set_duty_cycle" title="motor.set_duty_cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_duty_cycle</span></code></a>(port, pwm)</p></td>
+<td><p>Start a Motor with a specific PWM.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor.status" title="motor.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a>(port)</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Get the Motor status as one of:</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#motor.stop" title="motor.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>(port, *[, stop])</p></td>
+<td><p>Stop the Motor given by <code class="docutils literal notranslate"><span class="pre">port</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#motor.velocity" title="motor.velocity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">velocity</span></code></a>(port)</p></td>
+<td><p>Get the velocity (deg/sec) of a Motor (<em>NOTE</em>: empirical testing suggests the unit of the returned value is <em>not</em> in deg/sec).</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.absolute_position">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">absolute_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.absolute_position" title="Link to this definition">¶</a></dt>
+<dd><p>Get the absolute position of a Motor in degrees. Return values range
+from -179 to 180. Positive values indicate clockwise rotation from zero;
+negative values indicate counter-clockwise rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.get_duty_cycle">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">get_duty_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.get_duty_cycle" title="Link to this definition">¶</a></dt>
+<dd><p>Get the PWM duty cycle of a Motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.info">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.info" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Get the device ID and maximum speed of the Motor
+as a tuple.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[device_id: int, max_speed: int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.relative_position">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">relative_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.relative_position" title="Link to this definition">¶</a></dt>
+<dd><p>Get the relative position of a Motor. This is the cumulative number of
+degrees the motor has moved (positive or negative) from its starting
+position (either at hub boot or after a call to 
+<code class="docutils literal notranslate"><span class="pre">reset_relative_position</span></code>). Positive values indicate clockwise rotation
+(looking at the motor from the top); negative values indicate
+counter-clockwise rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.reset_relative_position">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">reset_relative_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.reset_relative_position" title="Link to this definition">¶</a></dt>
+<dd><p>Set the position used as the offset when using the <code class="docutils literal notranslate"><span class="pre">relative_position</span></code>
+or <code class="docutils literal notranslate"><span class="pre">run_to_relative_position</span></code> functions. If no position is given, resets
+to zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>position</strong> (<em>int</em>) – New reference position in  degrees</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.run">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.run" title="Link to this definition">¶</a></dt>
+<dd><p>Run a Motor at a constant speed until a new command is given.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Start motor</span>
+<span class="n">motor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration to use at start of run (deg/sec²)
+(1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.run_for_degrees">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">run_for_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.run_for_degrees" title="Link to this definition">¶</a></dt>
+<dd><p>Turn a Motor for a specific number of degrees. Positive values for
+<cite>degrees</cite> indicate clockwise rotation (when viewed from the top); negative
+values indicate counter-clockwise rotation. When awaited, returns a status
+of the movement that corresponds to one of the following constants:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>degrees</strong> (<em>int</em>) – The number of degrees to turn</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration to use at start of run (deg/sec²)
+(1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration to use at end of run (deg/sec²)
+(1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.run_for_time">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">run_for_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.run_for_time" title="Link to this definition">¶</a></dt>
+<dd><p>Run a Motor for a specific amount of time. When awaited, returns a
+status of the movement that corresponds to one of the following constants:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Run at 1000 velocity for 1 second</span>
+    <span class="k">await</span> <span class="n">motor</span><span class="o">.</span><span class="n">run_for_time</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="c1"># Run at 280 velocity for 1 second</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">run_for_time</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">280</span><span class="p">)</span>
+
+    <span class="c1"># Run at 280 velocity for 10 seconds with a slow deceleration</span>
+    <span class="k">await</span> <span class="n">motor_pair</span><span class="o">.</span><span class="n">run_for_time</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="n">deceleration</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>duration</strong> (<em>int</em>) – The duration in milliseconds</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration to use at start of run (deg/sec²)
+(1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration to use at end of run (deg/sec²)
+(1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.run_to_absolute_position">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">run_to_absolute_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.run_to_absolute_position" title="Link to this definition">¶</a></dt>
+<dd><p>Turn a Motor to an absolute position. While the value returned by
+<cite>absolute_position()</cite> is bounded between -179 and 180, you can provide
+position values outside of that range to this function and the hub will
+“wrap them around” into range. For example, specifying a <cite>position</cite> of 200
+is identical to specifying a <cite>position</cite> of -160; a subsequent call to
+<cite>motor.absolute_position()</cite> will return -160 (or therearouts) in either
+case.</p>
+<p>When awaited, returns a status of
+the movement that corresponds to one of the following constants:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>position</strong> (<em>int</em>) – The final position of the motor in degrees</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050</p></li>
+<li><p><strong>direction</strong> (<em>int</em>) – <p>The direction to turn. Options are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CLOCKWISE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COUNTERCLOCKWISE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SHORTEST_PATH</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.LONGEST_PATH</span></code></p></li>
+</ul>
+</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration to use at start of run (deg/sec²)
+(1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration to use at end of run (deg/sec²)
+(1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.run_to_relative_position">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">run_to_relative_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deceleration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.run_to_relative_position" title="Link to this definition">¶</a></dt>
+<dd><p>Turn a Motor to a position relative to its reference position (see
+<code class="docutils literal notranslate"><span class="pre">reset_relative_position</span></code>). When awaited, returns a status of the
+movement that corresponds to one of the following constants:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>position</strong> (<em>int</em>) – The degree of the motor</p></li>
+<li><p><strong>velocity</strong> (<em>int</em>) – The velocity in degrees/sec; value ranges depends on
+motor type: Small motor (essential): -660 to 660; Medium motor:
+-1110 to 1110; Large motor: -1050 to 1050</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – The acceleration to use at start of run (deg/sec²)
+(1–10000)</p></li>
+<li><p><strong>deceleration</strong> (<em>int</em>) – The deceleration to use at end of run (deg/sec²)
+(1–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.set_duty_cycle">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">set_duty_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pwm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.set_duty_cycle" title="Link to this definition">¶</a></dt>
+<dd><p>Start a Motor with a specific PWM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>pwm</strong> (<em>int</em>) – The PWM value (-10000–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.status">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.status" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Get the Motor status as one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.STALLED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CANCELED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.ERROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.DISCONNECTED</span></code></p></li>
+</ul>
+<p><em>NOTE</em>: Based on empirical testing,``motor.run`` does not set status to
+<code class="docutils literal notranslate"><span class="pre">motor.RUNNING</span></code>; other <code class="docutils literal notranslate"><span class="pre">run_*</span></code> functions do.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.stop">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.stop" title="Link to this definition">¶</a></dt>
+<dd><p>Stop the Motor given by <code class="docutils literal notranslate"><span class="pre">port</span></code>. If no <code class="docutils literal notranslate"><span class="pre">port</span></code> is specified, stop all
+attached motors.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">motor</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Start motor</span>
+<span class="n">motor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Wait for 2 seconds</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+<span class="c1"># Stop motor</span>
+<span class="n">motor</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – <p>The behavior of the Motor after it has stopped. Use the
+constants in the <code class="docutils literal notranslate"><span class="pre">motor</span></code> module. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.COAST</span></code> to make the motor coast until a stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.BRAKE</span></code> to brake and continue to brake after stop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.HOLD</span></code> to tell the motor to hold it’s position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.CONTINUE</span></code> to tell the motor to keep running at whatever             velocity it’s running at until it gets another command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_COAST</span></code> to make the motor brake until stop and then             coast and compensate for inaccuracies in the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motor.SMART_BRAKE</span></code> to make the motor brake and continue to brake             after stop and compensate for inaccuracies in the next command</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="motor.velocity">
+<span class="sig-prename descclassname"><span class="pre">motor.</span></span><span class="sig-name descname"><span class="pre">velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#motor.velocity" title="Link to this definition">¶</a></dt>
+<dd><p>Get the velocity (deg/sec) of a Motor (<em>NOTE</em>: empirical testing
+suggests the unit of the returned value is <em>not</em> in deg/sec).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">motor</a><ul>
+<li><a class="reference internal" href="#motor.absolute_position"><code class="docutils literal notranslate"><span class="pre">absolute_position()</span></code></a></li>
+<li><a class="reference internal" href="#motor.get_duty_cycle"><code class="docutils literal notranslate"><span class="pre">get_duty_cycle()</span></code></a></li>
+<li><a class="reference internal" href="#motor.info"><code class="docutils literal notranslate"><span class="pre">info()</span></code></a></li>
+<li><a class="reference internal" href="#motor.relative_position"><code class="docutils literal notranslate"><span class="pre">relative_position()</span></code></a></li>
+<li><a class="reference internal" href="#motor.reset_relative_position"><code class="docutils literal notranslate"><span class="pre">reset_relative_position()</span></code></a></li>
+<li><a class="reference internal" href="#motor.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+<li><a class="reference internal" href="#motor.run_for_degrees"><code class="docutils literal notranslate"><span class="pre">run_for_degrees()</span></code></a></li>
+<li><a class="reference internal" href="#motor.run_for_time"><code class="docutils literal notranslate"><span class="pre">run_for_time()</span></code></a></li>
+<li><a class="reference internal" href="#motor.run_to_absolute_position"><code class="docutils literal notranslate"><span class="pre">run_to_absolute_position()</span></code></a></li>
+<li><a class="reference internal" href="#motor.run_to_relative_position"><code class="docutils literal notranslate"><span class="pre">run_to_relative_position()</span></code></a></li>
+<li><a class="reference internal" href="#motor.set_duty_cycle"><code class="docutils literal notranslate"><span class="pre">set_duty_cycle()</span></code></a></li>
+<li><a class="reference internal" href="#motor.status"><code class="docutils literal notranslate"><span class="pre">status()</span></code></a></li>
+<li><a class="reference internal" href="#motor.stop"><code class="docutils literal notranslate"><span class="pre">stop()</span></code></a></li>
+<li><a class="reference internal" href="#motor.velocity"><code class="docutils literal notranslate"><span class="pre">velocity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hub.sound.html"
+                          title="previous chapter">hub.sound</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="motor_pair.html"
+                          title="next chapter">motor_pair</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/motor.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="motor_pair.html" title="motor_pair"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hub.sound.html" title="hub.sound"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">motor</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

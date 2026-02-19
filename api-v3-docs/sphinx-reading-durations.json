@@ -1,0 +1,21 @@
+{
+    "api": 0.051,
+    "generated/color": 0.009,
+    "generated/color_matrix": 0.044,
+    "generated/color_sensor": 0.019,
+    "generated/device": 0.028,
+    "generated/distance_sensor": 0.045,
+    "generated/force_sensor": 0.017,
+    "generated/hub": 0.037,
+    "generated/hub.button": 0.011,
+    "generated/hub.light": 0.01,
+    "generated/hub.light_matrix": 0.059,
+    "generated/hub.motion_sensor": 0.059,
+    "generated/hub.port": 0.005,
+    "generated/hub.sound": 0.026,
+    "generated/motor": 0.118,
+    "generated/motor_pair": 0.077,
+    "generated/orientation": 0.004,
+    "generated/runloop": 0.024,
+    "index": 0.003
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hub.sound &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/hub.sound.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="motor" href="motor.html" />
+    <link rel="prev" title="hub.port" href="hub.port.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="motor.html" title="motor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hub.port.html" title="hub.port"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub.sound</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-hub.sound">
+<span id="hub-sound"></span><h1>hub.sound<a class="headerlink" href="#module-hub.sound" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">sound</span></code> module includes functions to play sounds from the Spike hub
+speaker.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">sound</span></code> module, add the following import statement to your
+project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">sound</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">sound</span></code> module
+as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sound</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The following constants are defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ANY</span></code> = -2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> = -1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WAVEFORM_SINE</span></code> = 0 <em>(differs from the official docs)</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WAVEFORM_TRIANGLE</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WAVEFORM_SQUARE</span></code> = 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WAVEFORM_SAWTOOTH</span></code> = 3</p></li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.sound.beep" title="hub.sound.beep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">beep</span></code></a>([freq, duration, volume, attack, ...])</p></td>
+<td><p>Play a tone from the hub.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.sound.sound" title="hub.sound.sound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sound</span></code></a>(unknown)</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Plays a sound file from the hub (maybe?).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.sound.stop" title="hub.sound.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>()</p></td>
+<td><p>Stop all noise from the hub.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.sound.volume" title="hub.sound.volume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">volume</span></code></a>(volume)</p></td>
+<td><p>Set the baseline volume of the speaker.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.sound.beep">
+<span class="sig-prename descclassname"><span class="pre">hub.sound.</span></span><span class="sig-name descname"><span class="pre">beep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">440</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sustain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">waveform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.sound.beep" title="Link to this definition">¶</a></dt>
+<dd><p>Play a tone from the hub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>freq</strong> (<em>int</em>) – The frequency to play</p></li>
+<li><p><strong>duration</strong> (<em>int</em>) – The duration in milliseconds</p></li>
+<li><p><strong>volume</strong> (<em>int</em>) – The volume relative to baseline (0–100)</p></li>
+<li><p><strong>attack</strong> (<em>int</em>) – The time taken for initial run-up of level from nil to
+peak, beginning when the key is pressed</p></li>
+<li><p><strong>decay</strong> (<em>int</em>) – The time taken for the subsequent run down from the
+attack level to the designated sustain level</p></li>
+<li><p><strong>sustain</strong> (<em>int</em>) – The level during the main sequence of the sound’s
+duration, until the key is released</p></li>
+<li><p><strong>release</strong> (<em>int</em>) – The time taken for the level to decay from the sustain
+level to zero after the key is released</p></li>
+<li><p><strong>transition</strong> (<em>int</em>) – Time in milliseconds to transition into the sound if
+something is already playing in the channel</p></li>
+<li><p><strong>waveform</strong> (<em>int</em>) – The synthesized waveform. Use one of the constants in
+the <code class="docutils literal notranslate"><span class="pre">hub.sound</span></code> module</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – The desired channel to play on; options are:
+<code class="docutils literal notranslate"><span class="pre">sound.DEFAULT</span></code> and <code class="docutils literal notranslate"><span class="pre">sound.ANY</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.sound.sound">
+<span class="sig-prename descclassname"><span class="pre">hub.sound.</span></span><span class="sig-name descname"><span class="pre">sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unknown</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.sound.sound" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Plays a sound file from the hub (maybe?).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.sound.stop">
+<span class="sig-prename descclassname"><span class="pre">hub.sound.</span></span><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.sound.stop" title="Link to this definition">¶</a></dt>
+<dd><p>Stop all noise from the hub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.sound.volume">
+<span class="sig-prename descclassname"><span class="pre">hub.sound.</span></span><span class="sig-name descname"><span class="pre">volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.sound.volume" title="Link to this definition">¶</a></dt>
+<dd><p>Set the baseline volume of the speaker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>volume</strong> (<em>int</em>) – The volume (0–100)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">hub.sound</a><ul>
+<li><a class="reference internal" href="#hub.sound.beep"><code class="docutils literal notranslate"><span class="pre">beep()</span></code></a></li>
+<li><a class="reference internal" href="#hub.sound.sound"><code class="docutils literal notranslate"><span class="pre">sound()</span></code></a></li>
+<li><a class="reference internal" href="#hub.sound.stop"><code class="docutils literal notranslate"><span class="pre">stop()</span></code></a></li>
+<li><a class="reference internal" href="#hub.sound.volume"><code class="docutils literal notranslate"><span class="pre">volume()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hub.port.html"
+                          title="previous chapter">hub.port</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="motor.html"
+                          title="next chapter">motor</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/hub.sound.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="motor.html" title="motor"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hub.port.html" title="hub.port"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub.sound</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

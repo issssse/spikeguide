@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>runloop &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/runloop.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="orientation" href="orientation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="orientation.html" title="orientation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">runloop</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-runloop">
+<span id="runloop"></span><h1>runloop<a class="headerlink" href="#module-runloop" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">runloop</span></code> module contains all functions and constants to use the
+Runloop for asynchronous IO programming.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">runloop</span></code> module, add the following import statement to your
+project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">runloop</span></code>
+module as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">some_async_function</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The following constants are defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WAITING</span></code> = 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TIMEOUT</span></code> = 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CANCELLED</span></code> = 3</p></li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#runloop.run" title="runloop.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(*functions)</p></td>
+<td><p>Start any number of parallel <code class="docutils literal notranslate"><span class="pre">async</span></code> functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#runloop.sleep_ms" title="runloop.sleep_ms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sleep_ms</span></code></a>(duration)</p></td>
+<td><p>Pause the execution of the application for any amount of milliseconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#runloop.until" title="runloop.until"><code class="xref py py-obj docutils literal notranslate"><span class="pre">until</span></code></a>(function[, timeout])</p></td>
+<td><p>Returns an awaitable that will return when the condition in the function or lambda passed is <code class="docutils literal notranslate"><span class="pre">True</span></code> or when it times out.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#runloop.wait" title="runloop.wait"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wait</span></code></a>(unknown)</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Behavior is not known; use with caution.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="runloop.run">
+<span class="sig-prename descclassname"><span class="pre">runloop.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">functions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#runloop.run" title="Link to this definition">¶</a></dt>
+<dd><p>Start any number of parallel <code class="docutils literal notranslate"><span class="pre">async</span></code> functions. This is the function
+you should use to create programs with a similar structure to Word Blocks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>functions</strong> (<em>Awaitable</em>) – A tuple of the functions to run</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="runloop.sleep_ms">
+<span class="sig-prename descclassname"><span class="pre">runloop.</span></span><span class="sig-name descname"><span class="pre">sleep_ms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#runloop.sleep_ms" title="Link to this definition">¶</a></dt>
+<dd><p>Pause the execution of the application for any amount of milliseconds.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">light_matrix</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hi!&quot;</span><span class="p">)</span>
+    <span class="c1"># Wait for ten seconds</span>
+    <span class="k">await</span> <span class="n">runloop</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">light_matrix</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Are you still here?&quot;</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>duration</strong> (<em>int</em>) – The duration in milliseconds</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="runloop.until">
+<span class="sig-prename descclassname"><span class="pre">runloop.</span></span><span class="sig-name descname"><span class="pre">until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#runloop.until" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an awaitable that will return when the condition in the function
+or lambda passed is <code class="docutils literal notranslate"><span class="pre">True</span></code> or when it times out.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">color_sensor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">color</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">port</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">runloop</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_color_red</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">color_sensor</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">)</span> <span class="ow">is</span> <span class="n">color</span><span class="o">.</span><span class="n">RED</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Wait until Color Sensor sees red</span>
+    <span class="k">await</span> <span class="n">runloop</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">is_color_red</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Red!&quot;</span><span class="p">)</span>
+
+<span class="n">runloop</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>Callable</em><em>[</em><em>[</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – A callable with no parameters that returns either
+<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. Callable is anything that can be called, so
+a <code class="docutils literal notranslate"><span class="pre">def</span></code> or a <code class="docutils literal notranslate"><span class="pre">lambda</span></code></p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – A timeout for the function in milliseconds. If the
+callable does not return <code class="docutils literal notranslate"><span class="pre">True</span></code> within the timeout, the <code class="docutils literal notranslate"><span class="pre">until</span></code>
+still resolves after the timeout. 0 means no timeout, in that case
+it will not resolve until the callable returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="runloop.wait">
+<span class="sig-prename descclassname"><span class="pre">runloop.</span></span><span class="sig-name descname"><span class="pre">wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unknown</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#runloop.wait" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Behavior is not known; use with caution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unknown</strong> (<em>Iterator</em>) – Meaning unknown</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">runloop</a><ul>
+<li><a class="reference internal" href="#runloop.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+<li><a class="reference internal" href="#runloop.sleep_ms"><code class="docutils literal notranslate"><span class="pre">sleep_ms()</span></code></a></li>
+<li><a class="reference internal" href="#runloop.until"><code class="docutils literal notranslate"><span class="pre">until()</span></code></a></li>
+<li><a class="reference internal" href="#runloop.wait"><code class="docutils literal notranslate"><span class="pre">wait()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="orientation.html"
+                          title="previous chapter">orientation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/runloop.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="orientation.html" title="orientation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">runloop</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>device &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/device.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="distance_sensor" href="distance_sensor.html" />
+    <link rel="prev" title="color_matrix" href="color_matrix.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="distance_sensor.html" title="distance_sensor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="color_matrix.html" title="color_matrix"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">device</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-device">
+<span id="device"></span><h1>device<a class="headerlink" href="#module-device" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">device</span></code> module contains functions to get general information about
+any devices plugged into the hub (motors, sensors, displays, etc).</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">device</span></code> module, add the following import statement to your
+project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">device</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">device</span></code>
+module as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="n">port</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#device.data" title="device.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a>(port)</p></td>
+<td><p>Get the raw LPF-2 data from a device.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#device.get_duty_cycle" title="device.get_duty_cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_duty_cycle</span></code></a>(port)</p></td>
+<td><p>Get the duty cycle for a device.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#device.id" title="device.id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span></code></a>(port)</p></td>
+<td><p>Get the device type ID of a device.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#device.ready" title="device.ready"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ready</span></code></a>(port)</p></td>
+<td><p>When a device is attached to the hub, it might take a short amount of time before it is ready to accept requests.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#device.set_duty_cycle" title="device.set_duty_cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_duty_cycle</span></code></a>(port, duty_cycle)</p></td>
+<td><p>Set the duty cycle on a device.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="device.data">
+<span class="sig-prename descclassname"><span class="pre">device.</span></span><span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#device.data" title="Link to this definition">¶</a></dt>
+<dd><p>Get the raw LPF-2 data from a device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="device.get_duty_cycle">
+<span class="sig-prename descclassname"><span class="pre">device.</span></span><span class="sig-name descname"><span class="pre">get_duty_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#device.get_duty_cycle" title="Link to this definition">¶</a></dt>
+<dd><p>Get the duty cycle for a device. Returned value is in range 0 to
+10000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="device.id">
+<span class="sig-prename descclassname"><span class="pre">device.</span></span><span class="sig-name descname"><span class="pre">id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#device.id" title="Link to this definition">¶</a></dt>
+<dd><p>Get the device type ID of a device. Each device has an ID based on its
+type. IDs for commonly used Spike Prime inputs/outputs (from
+<a class="reference external" href="https://github.com/pybricks/technical-info/blob/master/assigned-numbers.md">https://github.com/pybricks/technical-info/blob/master/assigned-numbers.md</a>
+include:</p>
+<ul class="simple">
+<li><p><em>48</em>: Spike Prime Medium Motor (45603)</p></li>
+<li><p><em>49</em>: Spike Prime Large Motor (45602)</p></li>
+<li><p><em>61</em>: Color Sensor (45605)</p></li>
+<li><p><em>62</em>: Distance Sensor (45604)</p></li>
+<li><p><em>63</em>: Force Sensor (45606)</p></li>
+<li><p><em>64</em>: Color Light Matrix (45608)</p></li>
+<li><p><em>65</em>: Small Motor (45607)</p></li>
+</ul>
+<p>See the link above for a more extensive list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="device.ready">
+<span class="sig-prename descclassname"><span class="pre">device.</span></span><span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#device.ready" title="Link to this definition">¶</a></dt>
+<dd><p>When a device is attached to the hub, it might take a short amount of
+time before it is ready to accept requests. Use <code class="docutils literal notranslate"><span class="pre">ready</span></code> to test for the
+readiness of the attached devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="device.set_duty_cycle">
+<span class="sig-prename descclassname"><span class="pre">device.</span></span><span class="sig-name descname"><span class="pre">set_duty_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duty_cycle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#device.set_duty_cycle" title="Link to this definition">¶</a></dt>
+<dd><p>Set the duty cycle on a device. Range 0 to 10000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – A port from the <code class="docutils literal notranslate"><span class="pre">port</span></code> submodule in the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module</p></li>
+<li><p><strong>duty_cycle</strong> (<em>int</em>) – The PWM value (0–10000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">device</a><ul>
+<li><a class="reference internal" href="#device.data"><code class="docutils literal notranslate"><span class="pre">data()</span></code></a></li>
+<li><a class="reference internal" href="#device.get_duty_cycle"><code class="docutils literal notranslate"><span class="pre">get_duty_cycle()</span></code></a></li>
+<li><a class="reference internal" href="#device.id"><code class="docutils literal notranslate"><span class="pre">id()</span></code></a></li>
+<li><a class="reference internal" href="#device.ready"><code class="docutils literal notranslate"><span class="pre">ready()</span></code></a></li>
+<li><a class="reference internal" href="#device.set_duty_cycle"><code class="docutils literal notranslate"><span class="pre">set_duty_cycle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="color_matrix.html"
+                          title="previous chapter">color_matrix</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="distance_sensor.html"
+                          title="next chapter">distance_sensor</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/device.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="distance_sensor.html" title="distance_sensor"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="color_matrix.html" title="color_matrix"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">device</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

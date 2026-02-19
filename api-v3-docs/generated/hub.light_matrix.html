@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hub.light_matrix &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/hub.light_matrix.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hub.motion_sensor" href="hub.motion_sensor.html" />
+    <link rel="prev" title="hub.light" href="hub.light.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hub.motion_sensor.html" title="hub.motion_sensor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hub.light.html" title="hub.light"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub.light_matrix</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-hub.light_matrix">
+<span id="hub-light-matrix"></span><h1>hub.light_matrix<a class="headerlink" href="#module-hub.light_matrix" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">light_matrix</span></code> module includes functions to interact with the 5x5 LED
+matrix on the face of the SPIKE hubs.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">light_matrix</span></code> module, add the following import statement to
+your project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">light_matrix</span></code>
+module as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">light_matrix</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following constants are defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_HEART</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_HEART_SMALL</span></code> = 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_HAPPY</span></code> = 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SMILE</span></code> = 4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SAD</span></code> = 5</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CONFUSED</span></code> = 6</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ANGRY</span></code> = 7</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ASLEEP</span></code> = 8</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SURPRISED</span></code> = 9</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SILLY</span></code> = 10</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_FABULOUS</span></code> = 11</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_MEH</span></code> = 12</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_YES</span></code> = 13</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_NO</span></code> = 14</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK12</span></code> = 15</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK1</span></code> = 16</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK2</span></code> = 17</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK3</span></code> = 18</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK4</span></code> = 19</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK5</span></code> = 20</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK6</span></code> = 21</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK7</span></code> = 22</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK8</span></code> = 23</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK9</span></code> = 24</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK10</span></code> = 25</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CLOCK11</span></code> = 26</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_N</span></code> = 27</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_NE</span></code> = 28</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_E</span></code> = 29</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_SE</span></code> = 30</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_S</span></code> = 31</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_SW</span></code> = 32</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_W</span></code> = 33</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ARROW_NW</span></code> = 34</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_GO_RIGHT</span></code> = 35</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_GO_LEFT</span></code> = 36</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_GO_UP</span></code> = 37</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_GO_DOWN</span></code> = 38</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_TRIANGLE</span></code> = 39</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_TRIANGLE_LEFT</span></code> = 40</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_CHESSBOARD</span></code> = 41</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_DIAMOND</span></code> = 42</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_DIAMOND_SMALL</span></code> = 43</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SQUARE</span></code> = 44</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SQUARE_SMALL</span></code> = 45</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_RABBIT</span></code> = 46</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_COW</span></code> = 47</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_MUSIC_CROTCHET</span></code> = 48</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_MUSIC_QUAVER</span></code> = 49</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_MUSIC_QUAVERS</span></code> = 50</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_PITCHFORK</span></code> = 51</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_XMAS</span></code> = 52</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_PACMAN</span></code> = 53</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_TARGET</span></code> = 54</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_TSHIRT</span></code> = 55</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_ROLLERSKATE</span></code> = 56</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_DUCK</span></code> = 57</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_HOUSE</span></code> = 58</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_TORTOISE</span></code> = 59</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_BUTTERFLY</span></code> = 60</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_STICKFIGURE</span></code> = 61</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_GHOST</span></code> = 62</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SWORD</span></code> = 63</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_GIRAFFE</span></code> = 64</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SKULL</span></code> = 65</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_UMBRELLA</span></code> = 66</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMAGE_SNAKE</span></code> = 67</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHOWING</span></code> = 0 (<strong>UNDOCUMENTED</strong>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code> = 1 (<strong>UNDOCUMENTED</strong>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CANCELLED</span></code> = 2 (<strong>UNDOCUMENTED</strong>)</p></li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.light_matrix.clear" title="hub.light_matrix.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a>()</p></td>
+<td><p>Switch off all of the pixels on the Light Matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.light_matrix.get_orientation" title="hub.light_matrix.get_orientation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_orientation</span></code></a>()</p></td>
+<td><p>Get the current orientation of the Light Matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.light_matrix.get_pixel" title="hub.light_matrix.get_pixel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pixel</span></code></a>(x, y)</p></td>
+<td><p>Get the intensity of a specific pixel on the Light Matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.light_matrix.set_orientation" title="hub.light_matrix.set_orientation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_orientation</span></code></a>(top)</p></td>
+<td><p>Set the orientation of the Light Matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.light_matrix.set_pixel" title="hub.light_matrix.set_pixel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_pixel</span></code></a>(x, y, intensity)</p></td>
+<td><p>Set the brightness of one pixel (one of the 25 LEDs) on the Light Matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.light_matrix.show" title="hub.light_matrix.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(pixels)</p></td>
+<td><p>Set all of the lights at the same time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.light_matrix.show_image" title="hub.light_matrix.show_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show_image</span></code></a>(image)</p></td>
+<td><p>Display one of the built-in images on the display.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.light_matrix.write" title="hub.light_matrix.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a>(text[, intensity, time_per_character])</p></td>
+<td><p>Display text on the Light Matrix, one letter at a time, scrolling from right to left if necessary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.clear">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.clear" title="Link to this definition">¶</a></dt>
+<dd><p>Switch off all of the pixels on the Light Matrix.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="c1"># Update pixels to show an image on Light Matrix, and then turn</span>
+<span class="c1"># them off using the clear function</span>
+
+<span class="c1"># Show a small heart</span>
+<span class="n">light_matrix</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Wait for two seconds</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+<span class="c1"># Switch off the heart</span>
+<span class="n">light_matrix</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.get_orientation">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">get_orientation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.get_orientation" title="Link to this definition">¶</a></dt>
+<dd><p>Get the current orientation of the Light Matrix. Can be used with
+the following constants: <code class="docutils literal notranslate"><span class="pre">orientation.UP</span></code>, <code class="docutils literal notranslate"><span class="pre">orientation.LEFT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">orientation.RIGHT</span></code>, <code class="docutils literal notranslate"><span class="pre">orientation.DOWN</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.get_pixel">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">get_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.get_pixel" title="Link to this definition">¶</a></dt>
+<dd><p>Get the intensity of a specific pixel on the Light Matrix.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+
+<span class="c1"># Show a heart</span>
+<span class="n">light_matrix</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Print the value of the center pixel&#39;s intensity</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">light_matrix</span><span class="o">.</span><span class="n">get_pixel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – The pixel column, range 0–4</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The pixel row, range 0–4</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.set_orientation">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">set_orientation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.set_orientation" title="Link to this definition">¶</a></dt>
+<dd><p>Set the orientation of the Light Matrix. All subsequent calls will use
+the new orientation. Can be used with the following constants:
+<code class="docutils literal notranslate"><span class="pre">orientation.UP</span></code>, <code class="docutils literal notranslate"><span class="pre">orientation.LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">orientation.RIGHT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">orientation.DOWN</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>top</strong> (<em>int</em>) – The side of the hub to be considered the top</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.set_pixel">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">set_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.set_pixel" title="Link to this definition">¶</a></dt>
+<dd><p>Set the brightness of one pixel (one of the 25 LEDs) on the Light
+Matrix.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+<span class="c1"># Turn on the pixel in the center of the hub</span>
+<span class="n">light_matrix</span><span class="o">.</span><span class="n">set_pixel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – The pixel column, range 0–4</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The pixel row, range 0–4</p></li>
+<li><p><strong>intensity</strong> (<em>int</em>) – How bright to light up the pixel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.show">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.show" title="Link to this definition">¶</a></dt>
+<dd><p>Set all of the lights at the same time.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+<span class="c1"># Update all pixels on Light Matrix using the show function</span>
+
+<span class="c1"># Create a list with 25 identical intensity values</span>
+<span class="n">pixels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">*</span> <span class="mi">25</span>
+
+<span class="c1"># Update all pixels to show same intensity</span>
+<span class="n">light_matrix</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">pixels</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pixels</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – A list containing light intensity values for all 25
+pixels</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.show_image">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">show_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.show_image" title="Link to this definition">¶</a></dt>
+<dd><p>Display one of the built-in images on the display.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+<span class="c1"># Update pixels to show an image on Light Matrix using the</span>
+<span class="c1"># show_image function</span>
+
+<span class="c1"># Show a smiling face</span>
+<span class="n">light_matrix</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">light_matrix</span><span class="o">.</span><span class="n">IMAGE_HAPPY</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>int</em>) – The ID of the image to show. The range of available
+images is 1 to 67 (see the <code class="docutils literal notranslate"><span class="pre">light_matrix</span></code> module for available
+constants).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.light_matrix.write">
+<span class="sig-prename descclassname"><span class="pre">hub.light_matrix.</span></span><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_per_character</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.light_matrix.write" title="Link to this definition">¶</a></dt>
+<dd><p>Display text on the Light Matrix, one letter at a time, scrolling from
+right to left if necessary.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">light_matrix</span>
+<span class="c1"># White a message to the hub</span>
+<span class="n">light_matrix</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – The text to display</p></li>
+<li><p><strong>intensity</strong> (<em>int</em>) – How bright to light up the pixel</p></li>
+<li><p><strong>time_per_character</strong> (<em>int</em>) – How long to show each character on the
+display</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Awaitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">hub.light_matrix</a><ul>
+<li><a class="reference internal" href="#hub.light_matrix.clear"><code class="docutils literal notranslate"><span class="pre">clear()</span></code></a></li>
+<li><a class="reference internal" href="#hub.light_matrix.get_orientation"><code class="docutils literal notranslate"><span class="pre">get_orientation()</span></code></a></li>
+<li><a class="reference internal" href="#hub.light_matrix.get_pixel"><code class="docutils literal notranslate"><span class="pre">get_pixel()</span></code></a></li>
+<li><a class="reference internal" href="#hub.light_matrix.set_orientation"><code class="docutils literal notranslate"><span class="pre">set_orientation()</span></code></a></li>
+<li><a class="reference internal" href="#hub.light_matrix.set_pixel"><code class="docutils literal notranslate"><span class="pre">set_pixel()</span></code></a></li>
+<li><a class="reference internal" href="#hub.light_matrix.show"><code class="docutils literal notranslate"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="#hub.light_matrix.show_image"><code class="docutils literal notranslate"><span class="pre">show_image()</span></code></a></li>
+<li><a class="reference internal" href="#hub.light_matrix.write"><code class="docutils literal notranslate"><span class="pre">write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hub.light.html"
+                          title="previous chapter">hub.light</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="hub.motion_sensor.html"
+                          title="next chapter">hub.motion_sensor</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/hub.light_matrix.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hub.motion_sensor.html" title="hub.motion_sensor"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hub.light.html" title="hub.light"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub.light_matrix</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

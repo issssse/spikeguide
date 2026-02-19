@@ -171,6 +171,41 @@
       min-height: 100%;
     }
 
+    #docPageHost.api-external-page-host {
+      height: 100%;
+      min-height: 100%;
+    }
+
+    [data-testid="help-scroll-container"].api-external-scroll {
+      overflow: hidden;
+      padding-bottom: 0;
+    }
+
+    .api-external-root {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      height: 100%;
+      min-height: 100%;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .api-external-frame-wrap {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      background: #fff;
+    }
+
+    .api-external-frame {
+      width: 100%;
+      height: var(--shell-height);
+      border: none;
+      display: block;
+      background: #fff;
+    }
+
     .doc-view-switch {
       padding: 12px 16px;
       border-bottom: 1px solid #ededed;
@@ -292,6 +327,31 @@
       font-size: 11px;
       line-height: 14px;
       min-height: 14px;
+    }
+
+    .doc-tree-external-note {
+      display: none;
+      margin: 0;
+      padding: 12px 16px;
+      border-top: 1px solid #ededed;
+      color: #5d6975;
+      font-size: 12px;
+      line-height: 16px;
+      background: #fbfbfb;
+    }
+
+    .doc-tree-external-note a {
+      color: #0078cc;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .doc-tree-external-note a:hover {
+      text-decoration: underline;
+    }
+
+    #docTreeSidebar.api-external-mode .doc-tree-external-note {
+      display: block;
     }
 
     #docTreeList {
@@ -3045,14 +3105,39 @@ runloop.run(main())
     }
 
     var gettingStartedRoot = buildViewRoot(sourceTemplate, 'lls-help-python-spm');
-    var apiModulesRoot = buildViewRoot(sourceTemplate, 'lls-help-python-gs');
+    var apiModulesFallbackRoot = buildViewRoot(sourceTemplate, 'lls-help-python-gs');
 
     if (!findSectionBlock(gettingStartedRoot, 'lls-help-python-gs')) {
       gettingStartedRoot = sourceTemplate.cloneNode(true);
     }
-    if (!findSectionBlock(apiModulesRoot, 'lls-help-python-spm')) {
-      apiModulesRoot = sourceTemplate.cloneNode(true);
+    if (!findSectionBlock(apiModulesFallbackRoot, 'lls-help-python-spm')) {
+      apiModulesFallbackRoot = sourceTemplate.cloneNode(true);
     }
+
+    var externalApiDocPath = 'api-v3-docs/index.html';
+    var externalApiDocEnabled = true;
+
+    function buildExternalApiRoot() {
+      var root = document.createElement('div');
+      root.className = contentBlockClass + ' api-external-root';
+
+      var frameWrap = document.createElement('div');
+      frameWrap.className = 'api-external-frame-wrap';
+
+      var frame = document.createElement('iframe');
+      frame.className = 'api-external-frame';
+      frame.title = 'SPIKE Python API v3';
+      frame.loading = 'eager';
+      frame.src = externalApiDocPath;
+
+      frameWrap.appendChild(frame);
+      root.appendChild(frameWrap);
+      root.__externalApiFrame = frame;
+
+      return root;
+    }
+
+    var apiModulesRoot = externalApiDocEnabled ? buildExternalApiRoot() : apiModulesFallbackRoot;
 
     function collectIds(root) {
       var ids = Object.create(null);
@@ -3079,10 +3164,12 @@ runloop.run(main())
         key: 'api',
         label: 'API Modules',
         root: apiModulesRoot,
+        external: externalApiDocEnabled,
+        externalDocPath: externalApiDocPath,
         scrollTop: 0,
         searchQuery: '',
         manualExpanded: Object.create(null),
-        ids: collectIds(apiModulesRoot)
+        ids: collectIds(apiModulesFallbackRoot)
       }
     };
 
@@ -3147,10 +3234,22 @@ runloop.run(main())
     treeList.setAttribute('role', 'tree');
     treeList.setAttribute('aria-label', 'Documentation headings');
 
+    var externalNote = document.createElement('p');
+    externalNote.className = 'doc-tree-external-note';
+    externalNote.appendChild(document.createTextNode('Use API search and module navigation inside the right panel. '));
+    var externalNoteLink = document.createElement('a');
+    externalNoteLink.href = externalApiDocPath;
+    externalNoteLink.target = '_blank';
+    externalNoteLink.rel = 'noopener';
+    externalNoteLink.textContent = 'Open API docs in a new tab';
+    externalNote.appendChild(externalNoteLink);
+    externalNote.appendChild(document.createTextNode('.'));
+
     sidebar.appendChild(headerWrap);
     sidebar.appendChild(viewSwitch);
     sidebar.appendChild(searchWrap);
     sidebar.appendChild(treeList);
+    sidebar.appendChild(externalNote);
 
     outerContainer.insertBefore(sidebar, contentScreen);
 
@@ -3177,6 +3276,9 @@ runloop.run(main())
       if (!id) {
         return '';
       }
+      if (id === 'api-v3' || id.indexOf('api-v3-') === 0) {
+        return 'api';
+      }
       if (id.indexOf('lls-help-python-gs') === 0) {
         return 'gs';
       }
@@ -3190,6 +3292,26 @@ runloop.run(main())
         return 'api';
       }
       return '';
+    }
+
+    function setSidebarExternalMode(enabled) {
+      var isExternalMode = !!enabled;
+      sidebar.classList.toggle('api-external-mode', isExternalMode);
+      searchInput.disabled = isExternalMode;
+      if (isExternalMode) {
+        searchInput.value = '';
+      }
+      searchInput.placeholder = isExternalMode ? 'Use API search on right' : 'Search in docs';
+    }
+
+    function getExternalApiFrame(view) {
+      if (!view || !view.root) {
+        return null;
+      }
+      if (view.root.__externalApiFrame) {
+        return view.root.__externalApiFrame;
+      }
+      return view.root.querySelector('iframe.api-external-frame');
     }
 
     function getHeadingAnchor(heading) {
@@ -3906,13 +4028,39 @@ runloop.run(main())
       pageHost.innerHTML = '';
       pageHost.appendChild(nextView.root);
 
+      var isExternalView = !!nextView.external;
+      setSidebarExternalMode(isExternalView);
+      helpScrollContainer.classList.toggle('api-external-scroll', isExternalView);
+      pageHost.classList.toggle('api-external-page-host', isExternalView);
+
+      treeList.innerHTML = '';
+      searchResult.textContent = '';
+
+      if (isExternalView) {
+        activeModel = null;
+
+        var externalFrame = getExternalApiFrame(nextView);
+        if (externalFrame && nextView.externalDocPath && !nextView.externalInitialized) {
+          externalFrame.src = nextView.externalDocPath;
+          nextView.externalInitialized = true;
+        }
+
+        searchResult.textContent = 'Search and navigation are available in the API docs panel.';
+
+        if (!opts.skipHashUpdate) {
+          try {
+            history.replaceState(null, '', '#api-v3');
+          } catch (err) {
+            window.location.hash = 'api-v3';
+          }
+        }
+        return;
+      }
+
       hydrateEmbeddedImages(pageHost);
       decorateApiModules(pageHost);
 
       activeModel = buildTreeModel(nextView);
-
-      treeList.innerHTML = '';
-      searchResult.textContent = '';
 
       if (!activeModel.flatNodes.length) {
         searchInput.value = '';
@@ -3985,7 +4133,7 @@ runloop.run(main())
 
     apiViewButton.addEventListener('click', function () {
       if (currentViewKey !== 'api') {
-        activateView('api', { targetId: 'lls-help-python-spm' });
+        activateView('api', {});
       }
     });
 

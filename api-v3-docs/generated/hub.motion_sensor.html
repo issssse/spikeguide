@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hub.motion_sensor &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/hub.motion_sensor.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hub.port" href="hub.port.html" />
+    <link rel="prev" title="hub.light_matrix" href="hub.light_matrix.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hub.port.html" title="hub.port"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hub.light_matrix.html" title="hub.light_matrix"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub.motion_sensor</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-hub.motion_sensor">
+<span id="hub-motion-sensor"></span><h1>hub.motion_sensor<a class="headerlink" href="#module-hub.motion_sensor" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">motion_sensor</span></code> module includes functions to interact with the
+internal motion sensor (gyroscope) in a SPIKE hub.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">motion_sensor</span></code> module, add the following import statement to
+your project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">motion_sensor</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the
+<code class="docutils literal notranslate"><span class="pre">motion_sensor</span></code> module as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">motion_sensor</span><span class="o">.</span><span class="n">up_face</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The following constants are defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TAPPED</span></code> = 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DOUBLE_TAPPED</span></code> = 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHAKEN</span></code> = 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FALLING</span></code> = 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UNKNOWN</span></code> = -1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TOP</span></code> = 0 (the SPIKE Prime hub face with the Light Matrix)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FRONT</span></code> = 1 (the SPIKE Prime hub face where the speaker is)</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">RIGHT</span></code> = 2 (the right side of the SPIKE Prime hub when facing the</dt><dd><p>front hub face)</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BOTTOM</span></code> = 3 (the side of the SPIKE Prime hub where the battery is)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BACK</span></code> = 4 (the SPIKE Prime hub face with the USB charging port)</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">LEFT</span></code> = 5 (the left side of the SPIKE Prime hub when facing the front</dt><dd><p>hub face)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.motion_sensor.acceleration" title="hub.motion_sensor.acceleration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acceleration</span></code></a>(raw_unfiltered)</p></td>
+<td><p>Get a tuple containing x, y &amp; z acceleration values as integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.motion_sensor.angular_velocity" title="hub.motion_sensor.angular_velocity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">angular_velocity</span></code></a>(raw_unfiltered)</p></td>
+<td><p>Get a tuple containing x, y &amp; z angular velocity values as integers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.motion_sensor.gesture" title="hub.motion_sensor.gesture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gesture</span></code></a>()</p></td>
+<td><p>Get the gesture recognized.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.motion_sensor.get_yaw_face" title="hub.motion_sensor.get_yaw_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_yaw_face</span></code></a>()</p></td>
+<td><p>Get the face of the hub that yaw is relative to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.motion_sensor.quaternion" title="hub.motion_sensor.quaternion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quaternion</span></code></a>()</p></td>
+<td><p>Get the hub orientation quaternion as a tuple[w: float, x: float, y: float, z: float].</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.motion_sensor.reset_tap_count" title="hub.motion_sensor.reset_tap_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_tap_count</span></code></a>()</p></td>
+<td><p>Reset the tap count returned by the <code class="docutils literal notranslate"><span class="pre">tap_count</span></code> function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.motion_sensor.reset_yaw" title="hub.motion_sensor.reset_yaw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_yaw</span></code></a>(angle)</p></td>
+<td><p>Set the yaw angle offset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.motion_sensor.set_yaw_face" title="hub.motion_sensor.set_yaw_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_yaw_face</span></code></a>(up)</p></td>
+<td><p>Set what hub face is used as the yaw face.If you put the hub on a flat surface with this face pointing up, when you rotate the hub only the yaw will update.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.motion_sensor.stable" title="hub.motion_sensor.stable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stable</span></code></a>()</p></td>
+<td><p>Whether or not the hub is resting flat.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.motion_sensor.tap_count" title="hub.motion_sensor.tap_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tap_count</span></code></a>()</p></td>
+<td><p>Get the number of taps recognized since the program started or last time <code class="docutils literal notranslate"><span class="pre">motion_sensor.reset_tap_count()</span></code> was called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.motion_sensor.tilt_angles" title="hub.motion_sensor.tilt_angles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilt_angles</span></code></a>()</p></td>
+<td><p>Get a tuple containing yaw, pitch, and roll values as integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.motion_sensor.up_face" title="hub.motion_sensor.up_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">up_face</span></code></a>()</p></td>
+<td><p>Get the Hub face that is currently facing up.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.acceleration">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">acceleration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_unfiltered</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.acceleration" title="Link to this definition">¶</a></dt>
+<dd><p>Get a tuple containing x, y &amp; z acceleration values as integers. The
+values are milli G, so 1 / 1000 G.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>raw_unfiltered</strong> (<em>bool</em>) – If we want the data back raw and unfiltered</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.angular_velocity">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">angular_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_unfiltered</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.angular_velocity" title="Link to this definition">¶</a></dt>
+<dd><p>Get a tuple containing x, y &amp; z angular velocity values as integers. The
+values are decidegrees per second.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>raw_unfiltered</strong> (<em>bool</em>) – If we want the data back raw and unfiltered</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.gesture">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">gesture</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.gesture" title="Link to this definition">¶</a></dt>
+<dd><p>Get the gesture recognized. Possible values are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.TAPPED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.DOUBLE_TAPPED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.SHAKEN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.FALLING</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.UNKNOWN</span></code></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.get_yaw_face">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">get_yaw_face</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.get_yaw_face" title="Link to this definition">¶</a></dt>
+<dd><p>Get the face of the hub that yaw is relative to. If you put the hub on a
+flat surface with the face returned pointing up, when you rotate the hub
+only the yaw will update. Possible return values are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.TOP</span></code>: The SPIKE Prime hub face with the USB         charging port</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.FRONT</span></code>: The SPIKE Prime hub face with the Light         Matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.RIGHT</span></code>: The right side of the SPIKE Prime hub         when facing the front hub face</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.BOTTOM</span></code>: The side of the SPIKE Prime hub where         the battery is</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.BACK</span></code>: The SPIKE Prime hub face where the speaker is</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.LEFT</span></code>: The left side of the SPIKE Prime hub when         facing the front hub face</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.quaternion">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">quaternion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.quaternion" title="Link to this definition">¶</a></dt>
+<dd><p>Get the hub orientation quaternion as a tuple[w: float, x: float, y:
+float, z: float].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.reset_tap_count">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">reset_tap_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.reset_tap_count" title="Link to this definition">¶</a></dt>
+<dd><p>Reset the tap count returned by the <code class="docutils literal notranslate"><span class="pre">tap_count</span></code> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.reset_yaw">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">reset_yaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.reset_yaw" title="Link to this definition">¶</a></dt>
+<dd><p>Set the yaw angle offset. The angle set will be the new yaw value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>angle</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.set_yaw_face">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">set_yaw_face</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.set_yaw_face" title="Link to this definition">¶</a></dt>
+<dd><p>Set what hub face is used as the yaw face.If you put the hub on a flat
+surface with this face pointing up, when you rotate the hub only the yaw
+will update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>up</strong> (<em>int</em>) – <p>The hub face that should be set as the upwards facing hub
+face. Possible values are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.TOP</span></code>: The SPIKE Prime hub face with the USB             charging port</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.FRONT</span></code>: The SPIKE Prime hub face with the Light             Matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.RIGHT</span></code>: The right side of the SPIKE Prime hub             when facing the front hub face</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.BOTTOM</span></code>: The side of the SPIKE Prime hub where             the battery is</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.BACK</span></code>: The SPIKE Prime hub face where the speaker is</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.LEFT</span></code>: The left side of the SPIKE Prime hub when             facing the front hub face</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.stable">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">stable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.stable" title="Link to this definition">¶</a></dt>
+<dd><p>Whether or not the hub is resting flat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.tap_count">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">tap_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.tap_count" title="Link to this definition">¶</a></dt>
+<dd><p>Get the number of taps recognized since the program started or last time
+<code class="docutils literal notranslate"><span class="pre">motion_sensor.reset_tap_count()</span></code> was called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.tilt_angles">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">tilt_angles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.tilt_angles" title="Link to this definition">¶</a></dt>
+<dd><p>Get a tuple containing yaw, pitch, and roll values as integers. Values are
+in decidegrees (tenths of a degree). Values range from -1795 to 1800.
+Negative values indicate clockwise rotation from zero, positives indicate
+counter-clockwise rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.motion_sensor.up_face">
+<span class="sig-prename descclassname"><span class="pre">hub.motion_sensor.</span></span><span class="sig-name descname"><span class="pre">up_face</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.motion_sensor.up_face" title="Link to this definition">¶</a></dt>
+<dd><p>Get the Hub face that is currently facing up. Possible values are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.TOP</span></code>: The SPIKE Prime hub face with the USB         charging port</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.FRONT</span></code>: The SPIKE Prime hub face with the Light         Matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.RIGHT</span></code>: The right side of the SPIKE Prime hub         when facing the front hub face</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.BOTTOM</span></code>: The side of the SPIKE Prime hub where         the battery is</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.BACK</span></code>: The SPIKE Prime hub face where the speaker is</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_sensor.LEFT</span></code>: The left side of the SPIKE Prime hub when         facing the front hub face</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">hub.motion_sensor</a><ul>
+<li><a class="reference internal" href="#hub.motion_sensor.acceleration"><code class="docutils literal notranslate"><span class="pre">acceleration()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.angular_velocity"><code class="docutils literal notranslate"><span class="pre">angular_velocity()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.gesture"><code class="docutils literal notranslate"><span class="pre">gesture()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.get_yaw_face"><code class="docutils literal notranslate"><span class="pre">get_yaw_face()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.quaternion"><code class="docutils literal notranslate"><span class="pre">quaternion()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.reset_tap_count"><code class="docutils literal notranslate"><span class="pre">reset_tap_count()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.reset_yaw"><code class="docutils literal notranslate"><span class="pre">reset_yaw()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.set_yaw_face"><code class="docutils literal notranslate"><span class="pre">set_yaw_face()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.stable"><code class="docutils literal notranslate"><span class="pre">stable()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.tap_count"><code class="docutils literal notranslate"><span class="pre">tap_count()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.tilt_angles"><code class="docutils literal notranslate"><span class="pre">tilt_angles()</span></code></a></li>
+<li><a class="reference internal" href="#hub.motion_sensor.up_face"><code class="docutils literal notranslate"><span class="pre">up_face()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hub.light_matrix.html"
+                          title="previous chapter">hub.light_matrix</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="hub.port.html"
+                          title="next chapter">hub.port</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/hub.motion_sensor.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hub.port.html" title="hub.port"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hub.light_matrix.html" title="hub.light_matrix"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub.motion_sensor</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hub &#8212; Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5db766e5" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="canonical" href="https://jvolkening.github.io/lego-spike-python-v3-docs/generated/hub.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hub.button" href="hub.button.html" />
+    <link rel="prev" title="force_sensor" href="force_sensor.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hub.button.html" title="hub.button"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="force_sensor.html" title="force_sensor"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-hub">
+<span id="hub"></span><h1>hub<a class="headerlink" href="#module-hub" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">hub</span></code> package is home to all of the modules used to interact with
+various integrated inputs (gyroscope, buttons) and outputs (lights, sound) on a
+Spike Hub (e.g. LEGO parts 45601 or 45609). This package also contains the
+<cite>hub</cite> module with several direct functions used to interrogate and control the
+hub itself.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">hub</span></code> module itself, add the following import statement to
+your project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hub</span>
+</pre></div>
+</div>
+<p>All functions in the module should be called inside the <code class="docutils literal notranslate"><span class="pre">hub</span></code>
+module as a prefix like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">temperature</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>: The <code class="docutils literal notranslate"><span class="pre">hub</span></code> module contains a number of functions that are not
+documented in the official LEGO materials. These are marked as
+<strong>UNDOCUMENTED</strong> in the function descriptions below. Their behavior has been
+determined empirically and they should be used with caution.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.battery_current" title="hub.battery_current"><code class="xref py py-obj docutils literal notranslate"><span class="pre">battery_current</span></code></a>()</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Get the battery current.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.battery_temperature" title="hub.battery_temperature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">battery_temperature</span></code></a>()</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Get the battery temperature.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.battery_voltage" title="hub.battery_voltage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">battery_voltage</span></code></a>()</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Get the battery voltage.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.bootloader" title="hub.bootloader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bootloader</span></code></a>()</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Result currently unclear: don't use in code unless you know what you are doing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.device_uuid" title="hub.device_uuid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">device_uuid</span></code></a>()</p></td>
+<td><p>Get the device id.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.hardware_id" title="hub.hardware_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hardware_id</span></code></a>()</p></td>
+<td><p>Get the hardware id.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.power_off" title="hub.power_off"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_off</span></code></a>()</p></td>
+<td><p>Turn off the hub.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.reset" title="hub.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Send a hard reset command to the hub.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.soft_reset" title="hub.soft_reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">soft_reset</span></code></a>()</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Send a soft reset command to the hub.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hub.temperature" title="hub.temperature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">temperature</span></code></a>()</p></td>
+<td><p>Get the hub temperature measured in decidegrees Celsius (d°C), which is 1/10 of a degree Celsius (°C).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hub.usb_charge_current" title="hub.usb_charge_current"><code class="xref py py-obj docutils literal notranslate"><span class="pre">usb_charge_current</span></code></a>()</p></td>
+<td><p><strong>UNDOCUMENTED</strong> Get the USB charge current.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.battery_current">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">battery_current</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.battery_current" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Get the battery current.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.battery_temperature">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">battery_temperature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.battery_temperature" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Get the battery temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.battery_voltage">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">battery_voltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.battery_voltage" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Get the battery voltage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.bootloader">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">bootloader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.bootloader" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Result currently unclear: don’t use in code unless
+you know what you are doing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.device_uuid">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">device_uuid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.device_uuid" title="Link to this definition">¶</a></dt>
+<dd><p>Get the device id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.hardware_id">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">hardware_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.hardware_id" title="Link to this definition">¶</a></dt>
+<dd><p>Get the hardware id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.power_off">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">power_off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.power_off" title="Link to this definition">¶</a></dt>
+<dd><p>Turn off the hub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.reset">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.reset" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Send a hard reset command to the hub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.soft_reset">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">soft_reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.soft_reset" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Send a soft reset command to the hub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.temperature">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.temperature" title="Link to this definition">¶</a></dt>
+<dd><p>Get the hub temperature measured in decidegrees Celsius (d°C),
+which is 1/10 of a degree Celsius (°C).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hub.usb_charge_current">
+<span class="sig-prename descclassname"><span class="pre">hub.</span></span><span class="sig-name descname"><span class="pre">usb_charge_current</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hub.usb_charge_current" title="Link to this definition">¶</a></dt>
+<dd><p><strong>UNDOCUMENTED</strong> Get the USB charge current.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/spike_python_logo.png" alt="Logo of LEGO Spike Prime Python API v3"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">hub</a><ul>
+<li><a class="reference internal" href="#hub.battery_current"><code class="docutils literal notranslate"><span class="pre">battery_current()</span></code></a></li>
+<li><a class="reference internal" href="#hub.battery_temperature"><code class="docutils literal notranslate"><span class="pre">battery_temperature()</span></code></a></li>
+<li><a class="reference internal" href="#hub.battery_voltage"><code class="docutils literal notranslate"><span class="pre">battery_voltage()</span></code></a></li>
+<li><a class="reference internal" href="#hub.bootloader"><code class="docutils literal notranslate"><span class="pre">bootloader()</span></code></a></li>
+<li><a class="reference internal" href="#hub.device_uuid"><code class="docutils literal notranslate"><span class="pre">device_uuid()</span></code></a></li>
+<li><a class="reference internal" href="#hub.hardware_id"><code class="docutils literal notranslate"><span class="pre">hardware_id()</span></code></a></li>
+<li><a class="reference internal" href="#hub.power_off"><code class="docutils literal notranslate"><span class="pre">power_off()</span></code></a></li>
+<li><a class="reference internal" href="#hub.reset"><code class="docutils literal notranslate"><span class="pre">reset()</span></code></a></li>
+<li><a class="reference internal" href="#hub.soft_reset"><code class="docutils literal notranslate"><span class="pre">soft_reset()</span></code></a></li>
+<li><a class="reference internal" href="#hub.temperature"><code class="docutils literal notranslate"><span class="pre">temperature()</span></code></a></li>
+<li><a class="reference internal" href="#hub.usb_charge_current"><code class="docutils literal notranslate"><span class="pre">usb_charge_current()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="force_sensor.html"
+                          title="previous chapter">force_sensor</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="hub.button.html"
+                          title="next chapter">hub.button</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/hub.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hub.button.html" title="hub.button"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="force_sensor.html" title="force_sensor"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hub</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Jeremy Volkening.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>
