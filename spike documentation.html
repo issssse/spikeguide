@@ -229,6 +229,13 @@
       transition: border-color 0.12s ease, background-color 0.12s ease, color 0.12s ease;
     }
 
+    .doc-view-btn.doc-view-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
     .doc-view-btn:hover {
       border-color: #b9d8f5;
       background: #f4faff;
@@ -3223,14 +3230,16 @@ runloop.run(main())
     gsViewButton.textContent = 'Getting Started';
     gsViewButton.setAttribute('data-view', 'gs');
 
-    var apiViewButton = document.createElement('button');
-    apiViewButton.type = 'button';
-    apiViewButton.className = 'doc-view-btn';
-    apiViewButton.textContent = 'API Modules';
-    apiViewButton.setAttribute('data-view', 'api');
+    var apiDocsLink = document.createElement('a');
+    apiDocsLink.className = 'doc-view-btn doc-view-link';
+    apiDocsLink.textContent = 'SPIKE MODULE DOCS';
+    apiDocsLink.href = externalApiDocRemotePath;
+    apiDocsLink.target = '_blank';
+    apiDocsLink.rel = 'noopener';
+    apiDocsLink.setAttribute('aria-label', 'Open SPIKE module docs in a new tab');
 
     viewSwitch.appendChild(gsViewButton);
-    viewSwitch.appendChild(apiViewButton);
+    viewSwitch.appendChild(apiDocsLink);
 
     var searchWrap = document.createElement('div');
     searchWrap.className = 'doc-tree-search-wrap';
@@ -3253,22 +3262,10 @@ runloop.run(main())
     treeList.setAttribute('role', 'tree');
     treeList.setAttribute('aria-label', 'Documentation headings');
 
-    var externalNote = document.createElement('p');
-    externalNote.className = 'doc-tree-external-note';
-    externalNote.appendChild(document.createTextNode('Use API search and module navigation inside the right panel. '));
-    var externalNoteLink = document.createElement('a');
-    externalNoteLink.href = externalApiDocPath;
-    externalNoteLink.target = '_blank';
-    externalNoteLink.rel = 'noopener';
-    externalNoteLink.textContent = 'Open API docs in a new tab';
-    externalNote.appendChild(externalNoteLink);
-    externalNote.appendChild(document.createTextNode('.'));
-
     sidebar.appendChild(headerWrap);
     sidebar.appendChild(viewSwitch);
     sidebar.appendChild(searchWrap);
     sidebar.appendChild(treeList);
-    sidebar.appendChild(externalNote);
 
     outerContainer.insertBefore(sidebar, contentScreen);
 
@@ -3295,20 +3292,11 @@ runloop.run(main())
       if (!id) {
         return '';
       }
-      if (id === 'api-v3' || id.indexOf('api-v3-') === 0) {
-        return 'api';
-      }
       if (id.indexOf('lls-help-python-gs') === 0) {
         return 'gs';
       }
-      if (id.indexOf('lls-help-python-spm') === 0) {
-        return 'api';
-      }
       if (views.gs.ids[id]) {
         return 'gs';
-      }
-      if (views.api.ids[id]) {
-        return 'api';
       }
       return '';
     }
@@ -4026,7 +4014,6 @@ runloop.run(main())
 
     function setViewButtonState() {
       gsViewButton.classList.toggle('active', currentViewKey === 'gs');
-      apiViewButton.classList.toggle('active', currentViewKey === 'api');
     }
 
     function activateView(viewKey, options) {
@@ -4147,12 +4134,6 @@ runloop.run(main())
     gsViewButton.addEventListener('click', function () {
       if (currentViewKey !== 'gs') {
         activateView('gs', { targetId: 'lls-help-python-gs' });
-      }
-    });
-
-    apiViewButton.addEventListener('click', function () {
-      if (currentViewKey !== 'api') {
-        activateView('api', {});
       }
     });
 
