@@ -3114,7 +3114,21 @@ runloop.run(main())
       apiModulesFallbackRoot = sourceTemplate.cloneNode(true);
     }
 
-    var externalApiDocPath = 'api-v3-docs/index.html';
+    var externalApiDocLocalPath = 'api-v3-docs/index.html';
+    var externalApiDocRemotePath = 'https://jvolkening.github.io/lego-spike-python-v3-docs/';
+
+    function resolveExternalApiDocPath() {
+      var isFileProtocol = window.location.protocol === 'file:';
+      var isPortalPath = isFileProtocol && /\/run\/user\/\d+\/doc\//.test(window.location.pathname || '');
+
+      if (isPortalPath) {
+        return externalApiDocRemotePath;
+      }
+
+      return externalApiDocLocalPath;
+    }
+
+    var externalApiDocPath = resolveExternalApiDocPath();
     var externalApiDocEnabled = true;
 
     function buildExternalApiRoot() {
@@ -3129,6 +3143,11 @@ runloop.run(main())
       frame.title = 'SPIKE Python API v3';
       frame.loading = 'eager';
       frame.src = externalApiDocPath;
+      frame.addEventListener('error', function () {
+        if (frame.src !== externalApiDocRemotePath) {
+          frame.src = externalApiDocRemotePath;
+        }
+      });
 
       frameWrap.appendChild(frame);
       root.appendChild(frameWrap);
