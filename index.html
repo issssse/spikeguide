@@ -210,12 +210,14 @@
       padding: 12px 16px;
       border-bottom: 1px solid #ededed;
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       background: #fbfbfb;
     }
 
     .doc-view-btn {
       flex: 1 1 0;
+      min-width: 112px;
       border: 1px solid #d9e4ef;
       border-radius: 10px;
       background: #fff;
@@ -234,6 +236,7 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      flex: 1 1 100%;
     }
 
     .doc-view-btn:hover {
@@ -1237,10 +1240,12 @@ Next Steps
     window.__spikeStandaloneInit = true;
 
     var contentBlockClass = 'base__------packages-flipper-web-src-components-app-page-app-page-module';
+    var anchorClass = 'anchor__------packages-flipper-web-src-components-app-page-app-page-module';
     var headingClass = 'heading__------packages-flipper-web-src-components-app-page-app-page-module';
     var textBlockClass = 'text__------packages-flipper-web-src-components-app-page-app-page-content-module';
     var imageClass = 'image__------packages-flipper-web-src-components-app-page-app-page-content-module';
     var copyButtonClass = 'copyCodeButton__------packages-flipper-web-src-components-app-page-app-page-content-module';
+    var codeBlockClass = 'code__------packages-flipper-web-src-components-app-page-app-page-content-module allow-text-selection';
     var headingSelector =
       '.base__------packages-flipper-web-src-components-app-page-app-page-module h1, ' +
       '.base__------packages-flipper-web-src-components-app-page-app-page-module h2, ' +
@@ -1457,8 +1462,237 @@ Next Steps
       return clone;
     }
 
+    function createAnchor(id) {
+      var anchor = document.createElement('a');
+      anchor.className = anchorClass;
+      anchor.id = id;
+      return anchor;
+    }
+
+    function createHeading(tagName, title, id) {
+      var heading = document.createElement(tagName || 'h3');
+      heading.className = headingClass;
+      if (id) {
+        heading.id = id;
+      }
+      heading.textContent = title || '';
+      return heading;
+    }
+
+    function createTextBlock(html) {
+      var textBlock = document.createElement('div');
+      textBlock.className = textBlockClass;
+      textBlock.innerHTML = html || '';
+      return textBlock;
+    }
+
+    function createCodeBlock(codeText, codeIdSuffix) {
+      var pre = document.createElement('pre');
+      var button = document.createElement('button');
+      var code = document.createElement('code');
+      var suffix = codeIdSuffix || String(Math.random()).slice(2);
+
+      pre.setAttribute('dir', 'ltr');
+      pre.className = codeBlockClass;
+
+      button.className = copyButtonClass;
+      button.setAttribute('aria-label', 'Copy');
+      button.setAttribute('data-testid', 'help-python-code-copy__' + suffix);
+
+      code.setAttribute('data-testid', 'help-python-code__' + suffix);
+      code.textContent = codeText || '';
+
+      pre.appendChild(button);
+      pre.appendChild(code);
+      return pre;
+    }
+
+    function createSectionBlock(definition) {
+      var def = definition || {};
+      var block = document.createElement('div');
+      block.className = contentBlockClass;
+
+      if (def.id) {
+        block.appendChild(createAnchor(def.id));
+      }
+
+      block.appendChild(createHeading(def.tag || 'h3', def.title || '', def.id || ''));
+
+      if (def.html) {
+        block.appendChild(createTextBlock(def.html));
+      }
+
+      if (def.code) {
+        block.appendChild(createCodeBlock(def.code, def.codeIdSuffix || def.id || 'custom'));
+      }
+
+      if (def.children && def.children.length) {
+        def.children.forEach(function (childDef) {
+          block.appendChild(createSectionBlock(childDef));
+        });
+      }
+
+      return block;
+    }
+
+    function buildCustomPageRoot(sectionId, sectionTitle, sections) {
+      var root = document.createElement('div');
+      var sectionRoot = document.createElement('div');
+
+      root.className = contentBlockClass;
+      root.appendChild(createAnchor('lls-help-python'));
+      root.appendChild(createHeading('h1', 'Python', ''));
+
+      sectionRoot.className = contentBlockClass;
+      sectionRoot.appendChild(createAnchor(sectionId));
+      sectionRoot.appendChild(createHeading('h2', sectionTitle, sectionId));
+
+      (sections || []).forEach(function (sectionDef) {
+        sectionRoot.appendChild(createSectionBlock(sectionDef));
+      });
+
+      root.appendChild(sectionRoot);
+      return root;
+    }
+
     var gettingStartedRoot = buildViewRoot(sourceTemplate, 'lls-help-python-spm');
     var apiModulesFallbackRoot = buildViewRoot(sourceTemplate, 'lls-help-python-gs');
+    var examplesRoot = buildCustomPageRoot('lls-help-python-examples', 'Examples', [
+      {
+        id: 'lls-help-python-examples-intro',
+        tag: 'h3',
+        title: 'How To Use These Examples',
+        html: '<p>These sample programs are ready to copy into the SPIKE Python editor. Start with one, run it, then change values and observe what happens.</p>'
+      },
+      {
+        id: 'lls-help-python-examples-drive',
+        tag: 'h3',
+        title: 'Drive Forward and Back',
+        html: '<p>Pairs the drive motors and moves forward, pauses, then moves backward.</p>',
+        code:
+          'from hub import port\\n' +
+          'import motor_pair\\n' +
+          'import runloop\\n' +
+          '\\n' +
+          'async def main():\\n' +
+          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
+          '    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 400, 0, velocity=280)\\n' +
+          '    await runloop.sleep_ms(300)\\n' +
+          '    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 400, 0, velocity=-280)\\n' +
+          '\\n' +
+          'runloop.run(main())',
+        codeIdSuffix: 'examples_drive'
+      },
+      {
+        id: 'lls-help-python-examples-button-turn',
+        tag: 'h3',
+        title: 'Button Controlled Turn',
+        html: '<p>Press the left button on the hub to make a short turn and then stop.</p>',
+        code:
+          'from hub import button, port\\n' +
+          'import motor_pair\\n' +
+          'import runloop\\n' +
+          '\\n' +
+          'async def main():\\n' +
+          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
+          '    while True:\\n' +
+          '        if button.pressed(button.LEFT):\\n' +
+          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 55, velocity=240)\\n' +
+          '            motor_pair.stop(motor_pair.PAIR_1)\\n' +
+          '            await runloop.sleep_ms(250)\\n' +
+          '        await runloop.sleep_ms(10)\\n' +
+          '\\n' +
+          'runloop.run(main())',
+        codeIdSuffix: 'examples_button_turn'
+      },
+      {
+        id: 'lls-help-python-examples-color-beep',
+        tag: 'h3',
+        title: 'Color Triggered Beep',
+        html: '<p>Plays a beep when the color sensor detects red.</p>',
+        code:
+          'from hub import port, sound\\n' +
+          'import color\\n' +
+          'import color_sensor\\n' +
+          'import runloop\\n' +
+          '\\n' +
+          'async def main():\\n' +
+          '    while True:\\n' +
+          '        if color_sensor.color(port.B) == color.RED:\\n' +
+          '            sound.beep(880, 150, 100)\\n' +
+          '            await runloop.sleep_ms(250)\\n' +
+          '        await runloop.sleep_ms(20)\\n' +
+          '\\n' +
+          'runloop.run(main())',
+        codeIdSuffix: 'examples_color_beep'
+      }
+    ]);
+    var obsticlesRoot = buildCustomPageRoot('lls-help-python-obsticles', 'Obsticles', [
+      {
+        id: 'lls-help-python-obsticles-intro',
+        tag: 'h3',
+        title: 'Obsticle Handling Basics',
+        html: '<p>These patterns help a robot react when something is in front of it. All examples assume a Distance Sensor on port F and drive motors on ports C and D.</p>'
+      },
+      {
+        id: 'lls-help-python-obsticles-stop',
+        tag: 'h3',
+        title: 'Stop Before Collision',
+        html: '<p>Drives forward until an object is detected closer than 150 mm, then stops.</p>',
+        code:
+          'from hub import port\\n' +
+          'import distance_sensor\\n' +
+          'import motor_pair\\n' +
+          'import runloop\\n' +
+          '\\n' +
+          'async def main():\\n' +
+          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
+          '    motor_pair.move(motor_pair.PAIR_1, 0, velocity=260)\\n' +
+          '\\n' +
+          '    while True:\\n' +
+          '        distance = distance_sensor.distance(port.F)\\n' +
+          '        if 0 < distance < 150:\\n' +
+          '            motor_pair.stop(motor_pair.PAIR_1)\\n' +
+          '        else:\\n' +
+          '            motor_pair.move(motor_pair.PAIR_1, 0, velocity=260)\\n' +
+          '        await runloop.sleep_ms(20)\\n' +
+          '\\n' +
+          'runloop.run(main())',
+        codeIdSuffix: 'obsticles_stop'
+      },
+      {
+        id: 'lls-help-python-obsticles-avoid',
+        tag: 'h3',
+        title: 'Reverse and Turn Away',
+        html: '<p>When an obstacle is detected, the robot reverses and turns before moving forward again.</p>',
+        code:
+          'from hub import port\\n' +
+          'import distance_sensor\\n' +
+          'import motor_pair\\n' +
+          'import runloop\\n' +
+          '\\n' +
+          'async def main():\\n' +
+          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
+          '\\n' +
+          '    while True:\\n' +
+          '        distance = distance_sensor.distance(port.F)\\n' +
+          '        if 0 < distance < 180:\\n' +
+          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 260, 0, velocity=-260)\\n' +
+          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, 55, velocity=240)\\n' +
+          '        else:\\n' +
+          '            motor_pair.move(motor_pair.PAIR_1, 0, velocity=260)\\n' +
+          '        await runloop.sleep_ms(20)\\n' +
+          '\\n' +
+          'runloop.run(main())',
+        codeIdSuffix: 'obsticles_avoid'
+      },
+      {
+        id: 'lls-help-python-obsticles-tuning',
+        tag: 'h3',
+        title: 'Tuning Tips',
+        html: '<ul><li>Increase threshold distance if your robot still bumps into objects.</li><li>Lower velocity if reactions are too aggressive.</li><li>Always handle <code>-1</code> from the distance sensor (no reading).</li></ul>'
+      }
+    ]);
 
     if (!findSectionBlock(gettingStartedRoot, 'lls-help-python-gs')) {
       gettingStartedRoot = sourceTemplate.cloneNode(true);
@@ -1532,6 +1766,24 @@ Next Steps
         manualExpanded: Object.create(null),
         ids: collectIds(gettingStartedRoot)
       },
+      examples: {
+        key: 'examples',
+        label: 'Examples',
+        root: examplesRoot,
+        scrollTop: 0,
+        searchQuery: '',
+        manualExpanded: Object.create(null),
+        ids: collectIds(examplesRoot)
+      },
+      obsticles: {
+        key: 'obsticles',
+        label: 'Obsticles',
+        root: obsticlesRoot,
+        scrollTop: 0,
+        searchQuery: '',
+        manualExpanded: Object.create(null),
+        ids: collectIds(obsticlesRoot)
+      },
       api: {
         key: 'api',
         label: 'API Modules',
@@ -1602,6 +1854,18 @@ Next Steps
     gsViewButton.textContent = 'Getting Started';
     gsViewButton.setAttribute('data-view', 'gs');
 
+    var examplesViewButton = document.createElement('button');
+    examplesViewButton.type = 'button';
+    examplesViewButton.className = 'doc-view-btn';
+    examplesViewButton.textContent = 'Examples';
+    examplesViewButton.setAttribute('data-view', 'examples');
+
+    var obsticlesViewButton = document.createElement('button');
+    obsticlesViewButton.type = 'button';
+    obsticlesViewButton.className = 'doc-view-btn';
+    obsticlesViewButton.textContent = 'Obsticles';
+    obsticlesViewButton.setAttribute('data-view', 'obsticles');
+
     var apiDocsLink = document.createElement('a');
     apiDocsLink.className = 'doc-view-btn doc-view-link';
     apiDocsLink.textContent = 'SPIKE MODULE DOCS';
@@ -1611,6 +1875,8 @@ Next Steps
     apiDocsLink.setAttribute('aria-label', 'Open SPIKE module docs in a new tab');
 
     viewSwitch.appendChild(gsViewButton);
+    viewSwitch.appendChild(examplesViewButton);
+    viewSwitch.appendChild(obsticlesViewButton);
     viewSwitch.appendChild(apiDocsLink);
 
     var searchWrap = document.createElement('div');
@@ -1667,8 +1933,20 @@ Next Steps
       if (id.indexOf('lls-help-python-gs') === 0) {
         return 'gs';
       }
+      if (id.indexOf('lls-help-python-examples') === 0) {
+        return 'examples';
+      }
+      if (id.indexOf('lls-help-python-obsticles') === 0) {
+        return 'obsticles';
+      }
       if (views.gs.ids[id]) {
         return 'gs';
+      }
+      if (views.examples.ids[id]) {
+        return 'examples';
+      }
+      if (views.obsticles.ids[id]) {
+        return 'obsticles';
       }
       return '';
     }
@@ -2386,6 +2664,8 @@ Next Steps
 
     function setViewButtonState() {
       gsViewButton.classList.toggle('active', currentViewKey === 'gs');
+      examplesViewButton.classList.toggle('active', currentViewKey === 'examples');
+      obsticlesViewButton.classList.toggle('active', currentViewKey === 'obsticles');
     }
 
     function activateView(viewKey, options) {
@@ -2506,6 +2786,18 @@ Next Steps
     gsViewButton.addEventListener('click', function () {
       if (currentViewKey !== 'gs') {
         activateView('gs', { targetId: 'lls-help-python-gs' });
+      }
+    });
+
+    examplesViewButton.addEventListener('click', function () {
+      if (currentViewKey !== 'examples') {
+        activateView('examples', { targetId: 'lls-help-python-examples' });
+      }
+    });
+
+    obsticlesViewButton.addEventListener('click', function () {
+      if (currentViewKey !== 'obsticles') {
+        activateView('obsticles', { targetId: 'lls-help-python-obsticles' });
       }
     });
 
