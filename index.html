@@ -1937,6 +1937,71 @@ Next Steps
           '\\n' +
           '                await runloop.sleep_ms(5)',
         codeIdSuffix: 'examples_p_control'
+      },
+      {
+        id: 'lls-help-python-examples-pid-control',
+        tag: 'h3',
+        title: 'PID-reglering',
+        html:
+          '<h4>Beskrivning</h4>' +
+          '<p>PID-versionen förbättrar P-reglering genom två extra delar:</p>' +
+          '<ul><li><strong>P</strong> (som innan): reagerar på felet direkt.</li><li><strong>I</strong> (Integral): summerar fel över tid för att minska “ständiga småfel” (t.ex. om roboten alltid ligger lite fel p.g.a. mekanik).</li><li><strong>D</strong> (Derivata): tittar på hur snabbt felet förändras och kan dämpa svängningar (mindre “ormande”).</li></ul>' +
+          '<p><strong>Formeln blir:</strong> <code>steering = P + I + D</code></p>' +
+          '<p>Den här varianten brukar ge:</p>' +
+          '<ul><li>stabilare följning,</li><li>mindre oscillation,</li><li>bättre kontroll i kurvor (om värdena är bra inställda).</li></ul>',
+        code:
+          'if button.pressed(button.RIGHT):\\n' +
+          '            target = 45\\n' +
+          '\\n' +
+          '\\n' +
+          '            Kp = 1.8\\n' +
+          '            Ki = 0.01\\n' +
+          '            Kd = 0.8\\n' +
+          '\\n' +
+          '\\n' +
+          '            integral = 0\\n' +
+          '            last_error = 0\\n' +
+          '\\n' +
+          '\\n' +
+          '            while True:\\n' +
+          '\\n' +
+          '\\n' +
+          '                light = color_sensor.reflection(port.B)\\n' +
+          '\\n' +
+          '\\n' +
+          '                error = target - light\\n' +
+          '\\n' +
+          '\\n' +
+          '                # P\\n' +
+          '                P = Kp * error\\n' +
+          '\\n' +
+          '\\n' +
+          '                # I\\n' +
+          '                integral += error\\n' +
+          '                #integral = max(min(integral, 1000), -1000)  # anti-windup\\n' +
+          '                I = Ki * integral\\n' +
+          '\\n' +
+          '\\n' +
+          '                # D\\n' +
+          '                derivative = error - last_error\\n' +
+          '                D = Kd * derivative\\n' +
+          '\\n' +
+          '\\n' +
+          '                last_error = error\\n' +
+          '\\n' +
+          '\\n' +
+          '                steering = int(P + I + D)\\n' +
+          '\\n' +
+          '\\n' +
+          '                # Begränsa styrning\\n' +
+          '                steering = max(min(steering, 100), -100)\\n' +
+          '\\n' +
+          '\\n' +
+          '                motor_pair.move(motor_pair.PAIR_1, steering, velocity=200)\\n' +
+          '\\n' +
+          '\\n' +
+          '                await runloop.sleep_ms(5)',
+        codeIdSuffix: 'examples_pid_control'
       }
     ]);
     var obstaclesRoot = buildCustomPageRoot('lls-help-python-obstacles', 'Obstacles', [
