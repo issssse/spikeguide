@@ -2181,6 +2181,7 @@ Next Steps
     obstaclesViewButton.className = 'doc-view-btn';
     obstaclesViewButton.textContent = 'Obstacles';
     obstaclesViewButton.setAttribute('data-view', 'obstacles');
+    var obstaclesViewEnabled = false;
 
     var apiDocsLink = document.createElement('a');
     apiDocsLink.className = 'doc-view-btn doc-view-link';
@@ -2192,7 +2193,9 @@ Next Steps
 
     viewSwitch.appendChild(gsViewButton);
     viewSwitch.appendChild(examplesViewButton);
-    viewSwitch.appendChild(obstaclesViewButton);
+    if (obstaclesViewEnabled) {
+      viewSwitch.appendChild(obstaclesViewButton);
+    }
     viewSwitch.appendChild(apiDocsLink);
 
     var searchWrap = document.createElement('div');
@@ -2252,7 +2255,10 @@ Next Steps
       if (id.indexOf('lls-help-python-examples') === 0) {
         return 'examples';
       }
-      if (id.indexOf('lls-help-python-obstacles') === 0 || id.indexOf('lls-help-python-obsticles') === 0) {
+      if (
+        obstaclesViewEnabled &&
+        (id.indexOf('lls-help-python-obstacles') === 0 || id.indexOf('lls-help-python-obsticles') === 0)
+      ) {
         return 'obstacles';
       }
       if (views.gs.ids[id]) {
@@ -2261,7 +2267,7 @@ Next Steps
       if (views.examples.ids[id]) {
         return 'examples';
       }
-      if (views.obstacles.ids[id]) {
+      if (obstaclesViewEnabled && views.obstacles.ids[id]) {
         return 'obstacles';
       }
       return '';
@@ -2981,7 +2987,9 @@ Next Steps
     function setViewButtonState() {
       gsViewButton.classList.toggle('active', currentViewKey === 'gs');
       examplesViewButton.classList.toggle('active', currentViewKey === 'examples');
-      obstaclesViewButton.classList.toggle('active', currentViewKey === 'obstacles');
+      if (obstaclesViewEnabled) {
+        obstaclesViewButton.classList.toggle('active', currentViewKey === 'obstacles');
+      }
     }
 
     function activateView(viewKey, options) {
@@ -3112,11 +3120,13 @@ Next Steps
       }
     });
 
-    obstaclesViewButton.addEventListener('click', function () {
-      if (currentViewKey !== 'obstacles') {
-        activateView('obstacles', { targetId: 'lls-help-python-obstacles' });
-      }
-    });
+    if (obstaclesViewEnabled) {
+      obstaclesViewButton.addEventListener('click', function () {
+        if (currentViewKey !== 'obstacles') {
+          activateView('obstacles', { targetId: 'lls-help-python-obstacles' });
+        }
+      });
+    }
 
     sidebarToggleButton.addEventListener('click', function () {
       if (!slimSidebarMediaQuery.matches) {
