@@ -1559,83 +1559,203 @@ Next Steps
     var apiModulesFallbackRoot = buildViewRoot(sourceTemplate, 'lls-help-python-gs');
     var examplesRoot = buildCustomPageRoot('lls-help-python-examples', 'Examples', [
       {
-        id: 'lls-help-python-examples-intro',
+        id: 'lls-help-python-examples-training-camp-2',
         tag: 'h3',
-        title: 'How To Use These Examples',
-        html: '<p>These sample programs are ready to copy into the SPIKE Python editor. Start with one, run it, then change values and observe what happens.</p>'
-      },
-      {
-        id: 'lls-help-python-examples-drive',
-        tag: 'h3',
-        title: 'Drive Forward and Back',
-        html: '<p>Pairs the drive motors and moves forward, pauses, then moves backward.</p>',
+        title: 'Training camp 2 (distanssensor)',
+        html:
+          '<h4>Beskrivning:</h4>' +
+          '<p>Den här koden styr en robot med två motorer och en avståndssensor.</p>' +
+          '<p>När programmet startar kopplas motorerna på port C och D ihop som ett motorpar. Robotens motorer ställs först stilla.</p>' +
+          '<p>Sedan körs en oändlig loop (<code>while True</code>). I loopen mäts avståndet med sensorn på port F. Om ett objekt finns närmare än 200 (men mer än 0) reagerar roboten genom att:</p>' +
+          '<ol><li>Köra bakåt 400 grader med hastigheten -280.</li><li>Svänga genom att köra 200 grader med styrning 50.</li><li>Stanna igen.</li></ol>' +
+          '<p>Programmet fortsätter att kontrollera avståndet hela tiden.</p>',
         code:
           'from hub import port\\n' +
+          'import distance_sensor\\n' +
           'import motor_pair\\n' +
           'import runloop\\n' +
           '\\n' +
-          'async def main():\\n' +
-          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
-          '    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 400, 0, velocity=280)\\n' +
-          '    await runloop.sleep_ms(300)\\n' +
-          '    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 400, 0, velocity=-280)\\n' +
-          '\\n' +
-          'runloop.run(main())',
-        codeIdSuffix: 'examples_drive'
-      },
-      {
-        id: 'lls-help-python-examples-button-turn',
-        tag: 'h3',
-        title: 'Button Controlled Turn',
-        html: '<p>Press the left button on the hub to make a short turn and then stop.</p>',
-        code:
-          'from hub import button, port\\n' +
-          'import motor_pair\\n' +
-          'import runloop\\n' +
           '\\n' +
           'async def main():\\n' +
+          '    # NÄR PROGRAMMET STARTAR\\n' +
           '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
+          '   \\n' +
+          '    motor_pair.move(motor_pair.PAIR_1, 0)\\n' +
+          '\\n' +
+          '\\n' +
           '    while True:\\n' +
-          '        if button.pressed(button.LEFT):\\n' +
-          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 55, velocity=240)\\n' +
-          '            motor_pair.stop(motor_pair.PAIR_1)\\n' +
-          '            await runloop.sleep_ms(250)\\n' +
-          '        await runloop.sleep_ms(10)\\n' +
+          '        if 0 < distance_sensor.distance(port.F) < 200:\\n' +
+          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 400, 0, velocity= -280)\\n' +
+          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 50)\\n' +
+          '            motor_pair.move(motor_pair.PAIR_1, 0)\\n' +
+          '\\n' +
           '\\n' +
           'runloop.run(main())',
-        codeIdSuffix: 'examples_button_turn'
+        codeIdSuffix: 'examples_training_camp_2'
       },
       {
-        id: 'lls-help-python-examples-color-beep',
+        id: 'lls-help-python-examples-training-camp-3',
         tag: 'h3',
-        title: 'Color Triggered Beep',
-        html: '<p>Plays a beep when the color sensor detects red.</p>',
+        title: 'Training camp 3 (gyro)',
+        html:
+          '<h4>Beskrivning:</h4>' +
+          '<p>Den här koden styr en robot med färgsensor, motorer och knappar.</p>' +
+          '<p>När programmet startar kopplas motorerna på port C och D ihop som ett motorpar.</p>' +
+          '<p>Det finns två funktioner:</p>' +
+          '<ol><li><code>found_line()</code> → returnerar <code>True</code> om färgsensorn på port B ser svart (linjen).</li><li><code>lost_line()</code> → returnerar <code>True</code> om sensorn inte ser svart.</li></ol>' +
+          '<p>Programmet körs i en oändlig loop och reagerar på knappar.</p>' +
+          '<p>Om vänster knapp trycks:</p>' +
+          '<ul><li>Roboten kör rakt fram.</li><li>Den fortsätter tills färgsensorn hittar en svart linje.</li><li>Då stannar roboten.</li></ul>' +
+          '<p>Om höger knapp trycks:</p>' +
+          '<ul><li>Roboten börjar följa en linje.</li><li>När den hittar linjen svänger den åt höger.</li><li>När den tappar linjen svänger den åt vänster.</li><li>Den fortsätter så hela tiden och följer linjen framåt.</li></ul>',
         code:
-          'from hub import port, sound\\n' +
-          'import color\\n' +
+          'from hub import port, button\\n' +
           'import color_sensor\\n' +
+          'import color\\n' +
+          'import motor_pair\\n' +
           'import runloop\\n' +
           '\\n' +
+          '\\n' +
+          'def found_line():\\n' +
+          '    return color_sensor.color(port.B) is color.BLACK\\n' +
+          '\\n' +
+          '\\n' +
+          'def lost_line():\\n' +
+          '    return color_sensor.color(port.B) is not color.BLACK\\n' +
+          '\\n' +
+          '\\n' +
           'async def main():\\n' +
+          '    # NÄR PROGRAMMET STARTAR\\n' +
+          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
+          '\\n' +
+          '\\n' +
           '    while True:\\n' +
-          '        if color_sensor.color(port.B) == color.RED:\\n' +
-          '            sound.beep(880, 150, 100)\\n' +
-          '            await runloop.sleep_ms(250)\\n' +
-          '        await runloop.sleep_ms(20)\\n' +
+          '        # NÄR VÄNSTER KNAPP TRYCKS\\n' +
+          '        if button.pressed(button.LEFT):\\n' +
+          '\\n' +
+          '\\n' +
+          '            # KÖR FRAMMÅT\\n' +
+          '            motor_pair.move(motor_pair.PAIR_1, 0, velocity = 280)\\n' +
+          '\\n' +
+          '\\n' +
+          '            # VÄNTA TILLS COLOR DETECTOR HITTAR LINJEN\\n' +
+          '            await runloop.until(found_line)\\n' +
+          '           \\n' +
+          '            # STANNA\\n' +
+          '            motor_pair.stop(motor_pair.PAIR_1)\\n' +
+          '\\n' +
+          '\\n' +
+          '\\n' +
+          '\\n' +
+          '        # NÄR HÖGER KNAPP TRYCKS\\n' +
+          '        if button.pressed(button.RIGHT):\\n' +
+          '            while True:\\n' +
+          '                # OM LINJEN HITTAS\\n' +
+          '                # HÅLL HÖGER\\n' +
+          '                motor_pair.move(motor_pair.PAIR_1, 50, velocity = 100)\\n' +
+          '                await runloop.until(found_line)\\n' +
+          '\\n' +
+          '\\n' +
+          '                # ANNARS HÅLL VÄNSTER\\n' +
+          '                motor_pair.move(motor_pair.PAIR_1, -50, velocity = 100)\\n' +
+          '                await runloop.until(lost_line)\\n' +
+          '\\n' +
           '\\n' +
           'runloop.run(main())',
-        codeIdSuffix: 'examples_color_beep'
+        codeIdSuffix: 'examples_training_camp_3'
+      },
+      {
+        id: 'lls-help-python-examples-training-camp-3-alt',
+        tag: 'h4',
+        title: 'Alternativt:',
+        code:
+          '# NÄR HÖGER KNAPP TRYCKS\\n' +
+          'if button.pressed(button.RIGHT):\\n' +
+          '    while True:\\n' +
+          '        # OM LINJEN HITTAS\\n' +
+          '        if color_sensor.color(port.B) is color.BLUE:\\n' +
+          '            # HÅLL HÖGER\\n' +
+          '            await motor_pair.move_for_time(motor_pair.PAIR_1, 100, 50, velocity = 100)\\n' +
+          '\\n' +
+          '\\n' +
+          '        else:\\n' +
+          '            # ANNARS HÅLL VÄNSTER\\n' +
+          '            await motor_pair.move_for_time(motor_pair.PAIR_1, 100, -50, velocity = 100)',
+        codeIdSuffix: 'examples_training_camp_3_alt'
+      },
+      {
+        id: 'lls-help-python-examples-threshold',
+        tag: 'h3',
+        title: 'Tröskelbaserad linjeföljning',
+        html:
+          '<h4>Beskrivning</h4>' +
+          '<p>Roboten läser reflektionsvärdet från färgsensorn och delar upp det i tre områden:</p>' +
+          '<ul><li><code>&lt; 30</code> (mörkt / nära svart linje) → styr åt höger (<code>steering = 50</code>) för att hålla sig på linjen.</li><li><code>30–70</code> (mellan/”lagom”) → kör rakt fram (<code>steering = 0</code>).</li><li><code>&gt; 70</code> (ljust / tappat linjen) → styr åt vänster (<code>steering = -50</code>) för att hitta tillbaka.</li></ul>' +
+          '<p>Den kör i små “steg” med <code>move_for_time(...)</code> och justerar om hela tiden.</p>',
+        code:
+          '# NÄR HÖGER KNAPP TRYCKS\\n' +
+          'if button.pressed(button.RIGHT):\\n' +
+          '    while True:\\n' +
+          '        # OM LINJEN HITTAS\\n' +
+          '        if color_sensor.reflection(port.B) < 30:\\n' +
+          '            # HÅLL HÖGER\\n' +
+          '            await motor_pair.move_for_time(motor_pair.PAIR_1, 100, 50, velocity = 100)\\n' +
+          '\\n' +
+          '\\n' +
+          '\\n' +
+          '        elif 30 < color_sensor.reflection(port.B) < 70:\\n' +
+          '            await motor_pair.move_for_time(motor_pair.PAIR_1, 100, 0, velocity = 100)\\n' +
+          '\\n' +
+          '\\n' +
+          '        else:\\n' +
+          '            # ANNARS HÅLL VÄNSTER\\n' +
+          '            await motor_pair.move_for_time(motor_pair.PAIR_1, 100, -50, velocity = 100)',
+        codeIdSuffix: 'examples_threshold'
+      },
+      {
+        id: 'lls-help-python-examples-p-control',
+        tag: 'h3',
+        title: 'P-reglering (Proportionell styrning)',
+        html:
+          '<h4>Beskrivning</h4>' +
+          '<p>Här gör roboten en mjukare och mer exakt linjeföljning genom att:</p>' +
+          '<ul><li>Sätta ett mål (<code>target = 45</code>) = önskat reflektionsvärde (typ gränsen mellan svart/vitt).</li><li>Mäta aktuellt ljus.</li><li>Räkna ut fel: <code>error = target - light</code></li><li>Göra styrning proportionell mot felet: <code>steering = Kp * error</code></li></ul>' +
+          '<p>Stor skillnad mot trösklar:</p>' +
+          '<ul><li>Ju mer fel → desto mer styrning.</li><li>Ju mindre fel → desto rakare körning.</li></ul>' +
+          '<p>Du begränsar dessutom styrningen till <code>-100…100</code> och uppdaterar snabbt (var 5 ms).</p>',
+        code:
+          'if button.pressed(button.RIGHT):\\n' +
+          '            target = 45\\n' +
+          '            Kp = 1.8\\n' +
+          '\\n' +
+          '\\n' +
+          '            while True:\\n' +
+          '                light = color_sensor.reflection(port.B)\\n' +
+          '\\n' +
+          '\\n' +
+          '                error = target - light\\n' +
+          '\\n' +
+          '\\n' +
+          '                steering = int(Kp * error)\\n' +
+          '                        \\n' +
+          '# Begränsa styrning\\n' +
+          '                steering = max(min(steering, 100), -100)\\n' +
+          '                motor_pair.move(motor_pair.PAIR_1, steering, velocity=180)\\n' +
+          '\\n' +
+          '\\n' +
+          '                await runloop.sleep_ms(5)',
+        codeIdSuffix: 'examples_p_control'
       }
     ]);
-    var obsticlesRoot = buildCustomPageRoot('lls-help-python-obsticles', 'Obsticles', [
+    var obstaclesRoot = buildCustomPageRoot('lls-help-python-obstacles', 'Obstacles', [
       {
-        id: 'lls-help-python-obsticles-intro',
+        id: 'lls-help-python-obstacles-intro',
         tag: 'h3',
-        title: 'Obsticle Handling Basics',
+        title: 'Obstacle Handling Basics',
         html: '<p>These patterns help a robot react when something is in front of it. All examples assume a Distance Sensor on port F and drive motors on ports C and D.</p>'
       },
       {
-        id: 'lls-help-python-obsticles-stop',
+        id: 'lls-help-python-obstacles-stop',
         tag: 'h3',
         title: 'Stop Before Collision',
         html: '<p>Drives forward until an object is detected closer than 150 mm, then stops.</p>',
@@ -1658,10 +1778,10 @@ Next Steps
           '        await runloop.sleep_ms(20)\\n' +
           '\\n' +
           'runloop.run(main())',
-        codeIdSuffix: 'obsticles_stop'
+        codeIdSuffix: 'obstacles_stop'
       },
       {
-        id: 'lls-help-python-obsticles-avoid',
+        id: 'lls-help-python-obstacles-avoid',
         tag: 'h3',
         title: 'Reverse and Turn Away',
         html: '<p>When an obstacle is detected, the robot reverses and turns before moving forward again.</p>',
@@ -1684,10 +1804,10 @@ Next Steps
           '        await runloop.sleep_ms(20)\\n' +
           '\\n' +
           'runloop.run(main())',
-        codeIdSuffix: 'obsticles_avoid'
+        codeIdSuffix: 'obstacles_avoid'
       },
       {
-        id: 'lls-help-python-obsticles-tuning',
+        id: 'lls-help-python-obstacles-tuning',
         tag: 'h3',
         title: 'Tuning Tips',
         html: '<ul><li>Increase threshold distance if your robot still bumps into objects.</li><li>Lower velocity if reactions are too aggressive.</li><li>Always handle <code>-1</code> from the distance sensor (no reading).</li></ul>'
@@ -1775,14 +1895,14 @@ Next Steps
         manualExpanded: Object.create(null),
         ids: collectIds(examplesRoot)
       },
-      obsticles: {
-        key: 'obsticles',
-        label: 'Obsticles',
-        root: obsticlesRoot,
+      obstacles: {
+        key: 'obstacles',
+        label: 'Obstacles',
+        root: obstaclesRoot,
         scrollTop: 0,
         searchQuery: '',
         manualExpanded: Object.create(null),
-        ids: collectIds(obsticlesRoot)
+        ids: collectIds(obstaclesRoot)
       },
       api: {
         key: 'api',
@@ -1860,11 +1980,11 @@ Next Steps
     examplesViewButton.textContent = 'Examples';
     examplesViewButton.setAttribute('data-view', 'examples');
 
-    var obsticlesViewButton = document.createElement('button');
-    obsticlesViewButton.type = 'button';
-    obsticlesViewButton.className = 'doc-view-btn';
-    obsticlesViewButton.textContent = 'Obsticles';
-    obsticlesViewButton.setAttribute('data-view', 'obsticles');
+    var obstaclesViewButton = document.createElement('button');
+    obstaclesViewButton.type = 'button';
+    obstaclesViewButton.className = 'doc-view-btn';
+    obstaclesViewButton.textContent = 'Obstacles';
+    obstaclesViewButton.setAttribute('data-view', 'obstacles');
 
     var apiDocsLink = document.createElement('a');
     apiDocsLink.className = 'doc-view-btn doc-view-link';
@@ -1876,7 +1996,7 @@ Next Steps
 
     viewSwitch.appendChild(gsViewButton);
     viewSwitch.appendChild(examplesViewButton);
-    viewSwitch.appendChild(obsticlesViewButton);
+    viewSwitch.appendChild(obstaclesViewButton);
     viewSwitch.appendChild(apiDocsLink);
 
     var searchWrap = document.createElement('div');
@@ -1936,8 +2056,8 @@ Next Steps
       if (id.indexOf('lls-help-python-examples') === 0) {
         return 'examples';
       }
-      if (id.indexOf('lls-help-python-obsticles') === 0) {
-        return 'obsticles';
+      if (id.indexOf('lls-help-python-obstacles') === 0 || id.indexOf('lls-help-python-obsticles') === 0) {
+        return 'obstacles';
       }
       if (views.gs.ids[id]) {
         return 'gs';
@@ -1945,8 +2065,8 @@ Next Steps
       if (views.examples.ids[id]) {
         return 'examples';
       }
-      if (views.obsticles.ids[id]) {
-        return 'obsticles';
+      if (views.obstacles.ids[id]) {
+        return 'obstacles';
       }
       return '';
     }
@@ -2665,7 +2785,7 @@ Next Steps
     function setViewButtonState() {
       gsViewButton.classList.toggle('active', currentViewKey === 'gs');
       examplesViewButton.classList.toggle('active', currentViewKey === 'examples');
-      obsticlesViewButton.classList.toggle('active', currentViewKey === 'obsticles');
+      obstaclesViewButton.classList.toggle('active', currentViewKey === 'obstacles');
     }
 
     function activateView(viewKey, options) {
@@ -2795,9 +2915,9 @@ Next Steps
       }
     });
 
-    obsticlesViewButton.addEventListener('click', function () {
-      if (currentViewKey !== 'obsticles') {
-        activateView('obsticles', { targetId: 'lls-help-python-obsticles' });
+    obstaclesViewButton.addEventListener('click', function () {
+      if (currentViewKey !== 'obstacles') {
+        activateView('obstacles', { targetId: 'lls-help-python-obstacles' });
       }
     });
 
