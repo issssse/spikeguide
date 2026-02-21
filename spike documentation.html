@@ -1462,6 +1462,28 @@ Next Steps
       return clone;
     }
 
+    function stripPrimaryPythonTitle(root) {
+      if (!root) {
+        return root;
+      }
+
+      var primaryHeading = root.querySelector('h1.' + headingClass);
+      if (primaryHeading && primaryHeading.parentElement) {
+        var maybeAnchor = primaryHeading.previousElementSibling;
+        if (maybeAnchor && maybeAnchor.tagName === 'A' && maybeAnchor.id === 'lls-help-python') {
+          maybeAnchor.parentElement.removeChild(maybeAnchor);
+        }
+        primaryHeading.parentElement.removeChild(primaryHeading);
+      }
+
+      var orphanAnchor = root.querySelector('a#lls-help-python');
+      if (orphanAnchor && !root.querySelector('h1.' + headingClass)) {
+        orphanAnchor.parentElement.removeChild(orphanAnchor);
+      }
+
+      return root;
+    }
+
     function createAnchor(id) {
       var anchor = document.createElement('a');
       anchor.className = anchorClass;
@@ -1500,11 +1522,183 @@ Next Steps
       button.setAttribute('data-testid', 'help-python-code-copy__' + suffix);
 
       code.setAttribute('data-testid', 'help-python-code__' + suffix);
-      code.textContent = codeText || '';
+      code.textContent = String(codeText || '')
+        .replace(/\\r\\n/g, '\n')
+        .replace(/\\n/g, '\n')
+        .replace(/\\t/g, '\t');
 
       pre.appendChild(button);
       pre.appendChild(code);
       return pre;
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function highlightPythonCode(codeText) {
+      var keywords = {
+        and: true,
+        as: true,
+        async: true,
+        await: true,
+        break: true,
+        continue: true,
+        def: true,
+        elif: true,
+        else: true,
+        except: true,
+        finally: true,
+        for: true,
+        from: true,
+        if: true,
+        import: true,
+        in: true,
+        is: true,
+        lambda: true,
+        not: true,
+        or: true,
+        pass: true,
+        return: true,
+        try: true,
+        while: true,
+        with: true
+      };
+      var literals = {
+        True: true,
+        False: true,
+        None: true
+      };
+      var builtIns = {
+        bool: true,
+        dict: true,
+        float: true,
+        int: true,
+        list: true,
+        max: true,
+        min: true,
+        print: true,
+        range: true,
+        str: true
+      };
+
+      function wrapToken(className, value) {
+        return '<span class="' + className + '">' + escapeHtml(value) + '</span>';
+      }
+
+      function highlightLine(line) {
+        var result = [];
+        var index = 0;
+        var expectsFunctionName = false;
+
+        while (index < line.length) {
+          var char = line.charAt(index);
+
+          if (char === '#') {
+            result.push(wrapToken('hljs-comment', line.slice(index)));
+            break;
+          }
+
+          if (char === '"' || char === "'") {
+            var quote = char;
+            var end = index + 1;
+            while (end < line.length) {
+              var current = line.charAt(end);
+              if (current === '\\') {
+                end += 2;
+                continue;
+              }
+              if (current === quote) {
+                end += 1;
+                break;
+              }
+              end += 1;
+            }
+
+            result.push(wrapToken('hljs-string', line.slice(index, end)));
+            index = end;
+            expectsFunctionName = false;
+            continue;
+          }
+
+          if (/[0-9]/.test(char)) {
+            var numberStart = index;
+            index += 1;
+
+            while (index < line.length && /[0-9_]/.test(line.charAt(index))) {
+              index += 1;
+            }
+            if (line.charAt(index) === '.' && /[0-9]/.test(line.charAt(index + 1))) {
+              index += 1;
+              while (index < line.length && /[0-9_]/.test(line.charAt(index))) {
+                index += 1;
+              }
+            }
+
+            result.push(wrapToken('hljs-number', line.slice(numberStart, index)));
+            expectsFunctionName = false;
+            continue;
+          }
+
+          if (/[A-Za-z_]/.test(char)) {
+            var wordStart = index;
+            index += 1;
+
+            while (index < line.length && /[A-Za-z0-9_]/.test(line.charAt(index))) {
+              index += 1;
+            }
+
+            var token = line.slice(wordStart, index);
+            if (expectsFunctionName) {
+              result.push(wrapToken('hljs-title function_', token));
+              expectsFunctionName = false;
+            } else if (Object.prototype.hasOwnProperty.call(keywords, token)) {
+              result.push(wrapToken('hljs-keyword', token));
+              expectsFunctionName = token === 'def';
+            } else if (Object.prototype.hasOwnProperty.call(literals, token)) {
+              result.push(wrapToken('hljs-literal', token));
+            } else if (Object.prototype.hasOwnProperty.call(builtIns, token)) {
+              result.push(wrapToken('hljs-built_in', token));
+            } else {
+              result.push(escapeHtml(token));
+            }
+            continue;
+          }
+
+          result.push(escapeHtml(char));
+          index += 1;
+        }
+
+        return result.join('');
+      }
+
+      return String(codeText || '')
+        .replace(/\r\n?/g, '\n')
+        .split('\n')
+        .map(highlightLine)
+        .join('\n');
+    }
+
+    function highlightExamplesCodeBlocks(scopeRoot) {
+      if (!scopeRoot) {
+        return;
+      }
+
+      Array.prototype.forEach.call(
+        scopeRoot.querySelectorAll('code[data-testid^="help-python-code__examples_"]'),
+        function (codeElement) {
+          if (codeElement.dataset.customHighlighted === '1') {
+            return;
+          }
+
+          var rawCode = codeElement.textContent || '';
+          codeElement.innerHTML = highlightPythonCode(rawCode);
+          codeElement.dataset.customHighlighted = '1';
+        }
+      );
     }
 
     function createSectionBlock(definition) {
@@ -1540,8 +1734,6 @@ Next Steps
       var sectionRoot = document.createElement('div');
 
       root.className = contentBlockClass;
-      root.appendChild(createAnchor('lls-help-python'));
-      root.appendChild(createHeading('h1', 'Python', ''));
 
       sectionRoot.className = contentBlockClass;
       sectionRoot.appendChild(createAnchor(sectionId));
@@ -1617,11 +1809,11 @@ Next Steps
           '\\n' +
           '\\n' +
           'def found_line():\\n' +
-          '    return color_sensor.color(port.B) is color.BLACK\\n' +
+          '    return color_sensor.color(port.B) == color.BLACK\\n' +
           '\\n' +
           '\\n' +
           'def lost_line():\\n' +
-          '    return color_sensor.color(port.B) is not color.BLACK\\n' +
+          '    return color_sensor.color(port.B) != color.BLACK\\n' +
           '\\n' +
           '\\n' +
           'async def main():\\n' +
@@ -1673,7 +1865,7 @@ Next Steps
           'if button.pressed(button.RIGHT):\\n' +
           '    while True:\\n' +
           '        # OM LINJEN HITTAS\\n' +
-          '        if color_sensor.color(port.B) is color.BLUE:\\n' +
+          '        if color_sensor.color(port.B) == color.BLUE:\\n' +
           '            # HÅLL HÖGER\\n' +
           '            await motor_pair.move_for_time(motor_pair.PAIR_1, 100, 50, velocity = 100)\\n' +
           '\\n' +
@@ -1820,6 +2012,10 @@ Next Steps
     if (!findSectionBlock(apiModulesFallbackRoot, 'lls-help-python-spm')) {
       apiModulesFallbackRoot = sourceTemplate.cloneNode(true);
     }
+
+    gettingStartedRoot = stripPrimaryPythonTitle(gettingStartedRoot);
+    examplesRoot = stripPrimaryPythonTitle(examplesRoot);
+    obstaclesRoot = stripPrimaryPythonTitle(obstaclesRoot);
 
     var externalApiDocLocalPath = 'api-v3-docs/index.html';
     var externalApiDocRemotePath = 'https://jvolkening.github.io/lego-spike-python-v3-docs/';
@@ -2837,6 +3033,7 @@ Next Steps
 
       hydrateEmbeddedImages(pageHost);
       decorateApiModules(pageHost);
+      highlightExamplesCodeBlocks(pageHost);
 
       activeModel = buildTreeModel(nextView);
 
