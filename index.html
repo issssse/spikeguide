@@ -2004,70 +2004,19 @@ Next Steps
         codeIdSuffix: 'examples_pid_control'
       }
     ]);
-    var obstaclesRoot = buildCustomPageRoot('lls-help-python-obstacles', 'Obstacles', [
+    var obstaclesRoot = buildCustomPageRoot('lls-help-python-rules', 'Rules', [
       {
-        id: 'lls-help-python-obstacles-intro',
+        id: 'lls-help-python-rules-overview',
         tag: 'h3',
-        title: 'Obstacle Handling Basics',
-        html: '<p>These patterns help a robot react when something is in front of it. All examples assume a Distance Sensor on port F and drive motors on ports C and D.</p>'
-      },
-      {
-        id: 'lls-help-python-obstacles-stop',
-        tag: 'h3',
-        title: 'Stop Before Collision',
-        html: '<p>Drives forward until an object is detected closer than 150 mm, then stops.</p>',
-        code:
-          'from hub import port\\n' +
-          'import distance_sensor\\n' +
-          'import motor_pair\\n' +
-          'import runloop\\n' +
-          '\\n' +
-          'async def main():\\n' +
-          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
-          '    motor_pair.move(motor_pair.PAIR_1, 0, velocity=260)\\n' +
-          '\\n' +
-          '    while True:\\n' +
-          '        distance = distance_sensor.distance(port.F)\\n' +
-          '        if 0 < distance < 150:\\n' +
-          '            motor_pair.stop(motor_pair.PAIR_1)\\n' +
-          '        else:\\n' +
-          '            motor_pair.move(motor_pair.PAIR_1, 0, velocity=260)\\n' +
-          '        await runloop.sleep_ms(20)\\n' +
-          '\\n' +
-          'runloop.run(main())',
-        codeIdSuffix: 'obstacles_stop'
-      },
-      {
-        id: 'lls-help-python-obstacles-avoid',
-        tag: 'h3',
-        title: 'Reverse and Turn Away',
-        html: '<p>When an obstacle is detected, the robot reverses and turns before moving forward again.</p>',
-        code:
-          'from hub import port\\n' +
-          'import distance_sensor\\n' +
-          'import motor_pair\\n' +
-          'import runloop\\n' +
-          '\\n' +
-          'async def main():\\n' +
-          '    motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)\\n' +
-          '\\n' +
-          '    while True:\\n' +
-          '        distance = distance_sensor.distance(port.F)\\n' +
-          '        if 0 < distance < 180:\\n' +
-          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 260, 0, velocity=-260)\\n' +
-          '            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, 55, velocity=240)\\n' +
-          '        else:\\n' +
-          '            motor_pair.move(motor_pair.PAIR_1, 0, velocity=260)\\n' +
-          '        await runloop.sleep_ms(20)\\n' +
-          '\\n' +
-          'runloop.run(main())',
-        codeIdSuffix: 'obstacles_avoid'
-      },
-      {
-        id: 'lls-help-python-obstacles-tuning',
-        tag: 'h3',
-        title: 'Tuning Tips',
-        html: '<ul><li>Increase threshold distance if your robot still bumps into objects.</li><li>Lower velocity if reactions are too aggressive.</li><li>Always handle <code>-1</code> from the distance sensor (no reading).</li></ul>'
+        title: 'Tävlingsregler',
+        html:
+          '<p>Banan kommer att ha stigande svårighetsgrad, så tänk på tävlingen som en utmaning där målet är att komma så långt som möjligt och klara så många hinder som möjligt. Ni kommer inte att få ändra koden efter att ni har sett banan.</p>' +
+          '<p>Lite kort om reglerna: Varje platta är värd 3 poäng, och ni får upp till 3 försök att ta er förbi den. För varje nytt försök minskar poängen för den plattan med 1 poäng. Efter att alla försök är använda får ni gå vidare till nästa platta.</p>' +
+          '<p>Om flera deltagare får samma antal poäng, avgör tiden vem som vinner. Det betyder att det är viktigare att undvika misstag än att köra snabbt.</p>' +
+          '<p>Fråga Wiktor om du har frågor om reglerna.</p>' +
+          '<p>Det här är alla plattor som kan förekomma under tävlingen/redovisningen:</p>' +
+          '<p><img src="tiles_new_101.png" alt="Plattor som kan förekomma under tävlingen/redovisningen" style="display:block;max-width:100%;height:auto;margin:14px 0 8px;border-radius:12px;border:1px solid rgba(0,0,0,0.08);"></p>' +
+          '<p>Notera att vi kommer att ha en eller flera plattor med gap i linjen på banan.</p>'
       }
     ]);
 
@@ -2158,7 +2107,7 @@ Next Steps
       },
       obstacles: {
         key: 'obstacles',
-        label: 'Obstacles',
+        label: 'Rules',
         root: obstaclesRoot,
         scrollTop: 0,
         searchQuery: '',
@@ -2244,9 +2193,9 @@ Next Steps
     var obstaclesViewButton = document.createElement('button');
     obstaclesViewButton.type = 'button';
     obstaclesViewButton.className = 'doc-view-btn';
-    obstaclesViewButton.textContent = 'Obstacles';
+    obstaclesViewButton.textContent = 'Rules';
     obstaclesViewButton.setAttribute('data-view', 'obstacles');
-    var obstaclesViewEnabled = false;
+    var obstaclesViewEnabled = true;
 
     var apiDocsLink = document.createElement('a');
     apiDocsLink.className = 'doc-view-btn doc-view-link';
@@ -2322,7 +2271,11 @@ Next Steps
       }
       if (
         obstaclesViewEnabled &&
-        (id.indexOf('lls-help-python-obstacles') === 0 || id.indexOf('lls-help-python-obsticles') === 0)
+        (
+          id.indexOf('lls-help-python-rules') === 0 ||
+          id.indexOf('lls-help-python-obstacles') === 0 ||
+          id.indexOf('lls-help-python-obsticles') === 0
+        )
       ) {
         return 'obstacles';
       }
@@ -3188,7 +3141,7 @@ Next Steps
     if (obstaclesViewEnabled) {
       obstaclesViewButton.addEventListener('click', function () {
         if (currentViewKey !== 'obstacles') {
-          activateView('obstacles', { targetId: 'lls-help-python-obstacles' });
+          activateView('obstacles', { targetId: 'lls-help-python-rules' });
         }
       });
     }
