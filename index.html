@@ -577,6 +577,37 @@
       margin-right: -4px;
     }
 
+    .rules-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 38%);
+      gap: 22px;
+      align-items: start;
+      margin-top: 8px;
+    }
+
+    .rules-text > p {
+      margin-top: 0;
+    }
+
+    .rules-tiles-col {
+      margin: 0;
+    }
+
+    .rules-tiles-image {
+      display: block;
+      width: 100%;
+      max-width: 460px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      background: #fff;
+    }
+
+    .rules-gap-note {
+      margin-top: 10px;
+    }
+
     .api-modules-title {
       background: linear-gradient(90deg, #0090f5 0%, #21b4ff 100%);
       color: #fff;
@@ -871,6 +902,14 @@
     @media (max-width: 1160px) {
       :root {
         --sidebar-width: 290px;
+      }
+
+      .rules-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .rules-tiles-image {
+        max-width: 560px;
       }
     }
 
@@ -2010,13 +2049,19 @@ Next Steps
         tag: 'h3',
         title: 'Tävlingsregler',
         html:
+          '<div class="rules-layout">' +
+          '<div class="rules-text">' +
           '<p>Banan kommer att ha stigande svårighetsgrad, så tänk på tävlingen som en utmaning där målet är att komma så långt som möjligt och klara så många hinder som möjligt. Ni kommer inte att få ändra koden efter att ni har sett banan.</p>' +
           '<p>Lite kort om reglerna: Varje platta är värd 3 poäng, och ni får upp till 3 försök att ta er förbi den. För varje nytt försök minskar poängen för den plattan med 1 poäng. Efter att alla försök är använda får ni gå vidare till nästa platta.</p>' +
           '<p>Om flera deltagare får samma antal poäng, avgör tiden vem som vinner. Det betyder att det är viktigare att undvika misstag än att köra snabbt.</p>' +
           '<p>Fråga Wiktor om du har frågor om reglerna.</p>' +
           '<p>Det här är alla plattor som kan förekomma under tävlingen/redovisningen:</p>' +
-          '<p><img src="tiles_new_101.png" alt="Plattor som kan förekomma under tävlingen/redovisningen" style="display:block;max-width:100%;height:auto;margin:14px 0 8px;border-radius:12px;border:1px solid rgba(0,0,0,0.08);"></p>' +
-          '<p>Notera att vi kommer att ha en eller flera plattor med gap i linjen på banan.</p>'
+          '</div>' +
+          '<figure class="rules-tiles-col">' +
+          '<img class="rules-tiles-image" src="tiles_new_101.png" alt="Plattor som kan förekomma under tävlingen/redovisningen">' +
+          '</figure>' +
+          '</div>' +
+          '<p class="rules-gap-note">Notera att vi kommer att ha en eller flera plattor med gap i linjen på banan.</p>'
       }
     ]);
 
